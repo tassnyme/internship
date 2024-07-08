@@ -1,5 +1,5 @@
 import React from 'react';
-import '../index.css';
+import styles from '../styles/SignAndLog.module.css'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { AiOutlineMail } from "react-icons/ai";
@@ -44,19 +44,20 @@ function Login() {
 
   });
   return (
-    <div className='wrapper '>
+    <div className={styles.wrapper}>
       
-    <div className='flex items-center justify-center bg-white  m-12 
+    <div className='flex items-center justify-center  m-12 
      -py-1
      lg:flex-row
      xs:flex-col
     rounded-md
     border-4
-    divv
+    bg-yellowgreen
+    
     ' >
-      <div className='w-1/2 h-full py-8 px-8'>
+      <div className={styles.divv}>
       <>
-        <h1 className='py-8 text-2xl tracking-wider font-semibold pb-20'>Login   User</h1>
+        <h1 className='py-8 text-center text-2xl tracking-wider font-semibold pb-20'>Login User</h1>
         <form onSubmit={formik.handleSubmit} >
           
           <div className='flex flex-col pb-16 px-12 gap-8 items-start'>
@@ -119,14 +120,14 @@ function Login() {
               </div>
 
               <div >
-                <Link to="/signup" className='hover:underline '>create account?</Link>
+                <Link to="/signup" className='hover:underline text-white no-underline' >create account?</Link>
               </div>
               
             </div>
             
            
           <div className=''>
-            <button className="btn">Login</button>
+            <button className={styles.btn}>Login</button>
           </div>
         
         </div> 

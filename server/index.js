@@ -44,3 +44,12 @@ app.post('/register', async (req, res) => {
 app.listen(3001, () => {
   console.log(`Server is running on http://localhost:3001`);
 });
+
+
+
+
+app.get('/admin/list', async (req, res) => {
+  User.find()
+  .then(users => res.json(users))
+  .catch(err => res.json(err))
+});

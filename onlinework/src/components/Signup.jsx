@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../index.css'; // Ensure this path is correct
+import styles from '../styles/SignAndLog.module.css'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { AiOutlineMail } from "react-icons/ai";
@@ -46,19 +46,19 @@ function Signup() {
   });
   
   return (
-    <div className='wrapper '>
+    <div className={styles.wrapper}>
       
-    <div className='flex items-start justify-center bg-white  m-4 
+    <div className='flex items-start justify-center   m-4 
      -py-1
      lg:flex-row
      xs:flex-col
     rounded-md
     border-4
-    divv
+    bg-yellowgreen
     ' >
-      <div className='w-[50%] h-full py-4 px-14 '>
+      <div className='w-[50%] h-full py-4 px-14 text-white'>
       <>
-        <h1 className='py-8 text-2xl tracking-wider font-semibold'>SignUp </h1>
+        <h1 className='py-8 text-2xl text-center tracking-wider font-semibold'>SignUp </h1>
          <form onSubmit={formik.handleSubmit} >
           
           <div className='flex flex-col px-12 gap-8 items-start'>
@@ -155,22 +155,22 @@ function Signup() {
             <div className='flex gap-x-8 w-full  justify-between items-end'>
 
               <div >
-                <Link to="/login" className='hover:underline '>Already have an account?</Link>
+                <Link to="/login" className='hover:underline text-white no-underline'>Already have an account?</Link>
               </div>
               
             </div>
             
            
             <div className=''>
-            <button className="btn" type='submit'>Signup</button>
+            <button className={styles.btn} type='submit'>Signup</button>
           </div>
           <div className='border-white border-2'>{message && <p className='font-bold border-white py-2 animate-pulse'>{message}</p>}</div>
           </div> 
         </form>
     </>
       </div>
-      <div className='w-1/2 h-full bg-black '>
-        <img src={photo} alt="Description of the photo" className='h-[600px]' />
+      <div className='w-1/2 h-full  '>
+        <img src={photo} alt="Description of the photo" className='h-[700px]' />
       </div>
     </div>
     </div>

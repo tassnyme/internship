@@ -12,6 +12,9 @@ module.exports = {
         widest: '0.3em',
         custom: '5px', // Adding a custom value for letter-spacing
       },
+      colors:{
+        'yellowgreen': 'rgb(154,205,50)'
+      }
     },
   },
   plugins: [],
