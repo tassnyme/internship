@@ -21,7 +21,6 @@ function ListOfUsers() {
     }, []);
   return (
     <div>
-        helo
       <Table striped bordered hover variant="light">
       <thead>
         <tr>

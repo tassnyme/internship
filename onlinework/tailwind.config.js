@@ -13,7 +13,12 @@ module.exports = {
         custom: '5px', // Adding a custom value for letter-spacing
       },
       colors:{
-        'yellowgreen': 'rgb(154,205,50)'
+        'yellowgreen': 'rgb(154,205,50)',
+        'violette' : 'rgb(204, 153, 255)',
+        'peach' :'rgb(255, 204, 153)',
+        'coral' : 'rgb(255, 153, 153)',
+        'turquoise': 'rgb(153, 255, 255)',
+
       }
     },
   },

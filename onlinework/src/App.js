@@ -7,6 +7,7 @@ import Admin from './components/Admin';
 import UserProfile from './components/UserProfile';
 import Header from './components/Header';
 import ListOfUsers from './components/ListOfUsers';
+import TodoList from './components/TodoList';
 
  
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/admin/profile" element={<UserProfile/>}></Route>
           <Route path="/Header" element={<Header/>}/>
           <Route path ="/admin/list" element={<ListOfUsers/>}></Route>
+          <Route path="/tasks" element={<TodoList />} />
 
         </Routes>
       </BrowserRouter>

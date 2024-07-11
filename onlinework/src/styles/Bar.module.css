@@ -83,13 +83,40 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color:yellowgreen ;
+    background-color:hsl(80, 61%, 50%) ;
     width: 75vw;
     height: 120px;
     padding: 0 10px;
     color: white;
     border-radius: 20px;
+    margin-left: -20px;
 
 
 }
-@media 
+.grid{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    background: #ffffff;
+    width:95vw;
+    height:95vh;
+    grid-template-areas:
+    "sidd  navv  navv navv"
+    "sidd liss liss liss"
+    "sidd liss  liss liss"
+    "sidd  . . .";
+
+}
+.navv{
+    grid-area: navv;
+}
+.sidd{
+    grid-area: sidd;
+}.liss{
+    grid-area: liss;
+    margin-left: -20px;
+
+}

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from '../styles/SignAndLog.module.css'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -6,8 +5,10 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import photo from '../assets/photo.jpg'; 
-
+import React, { useState } from 'react';
 function Login() {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const formik = useFormik({
     initialValues: {
       password:'',
@@ -17,31 +18,35 @@ function Login() {
       password: Yup.string().required('Required'),
       email: Yup.string().email('Invalid email address').required('Required'),
     }),
-    onSubmit: async ({ email, password }) => {
-      try {
-        const response = await fetch('/api/login', {
-          method: 'POST', 
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }), 
-        });
-
-        if (email==='tassnymelaroussy@gmail.com' && password==="tasstass"){
-          window.location.href = '/admin';
     
+    onSubmit: async (values) => {
+      try {
+        const response = await fetch('http://localhost:3001/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(values),
+        });
+        
+        if (!response.ok) {
+          throw new Error('Login failed');
         }
+
         const data = await response.json();
-        if (data.success) {
-            window.location.href = data.redirect || '/user';
-          } else {
-            console.error('Login failed:', data.message || 'Unknown error'); 
-          }
-        } catch (error) {
-          console.error('Login error:', error); 
+        if (data.success && !data.admin) {
+          console.log('Login successful as user');
+          window.location.href = '/user';
+        } else if (data.success && data.admin) {
+          console.log('Login successful as admin');
+          window.location.href = '/admin';
+        } else if (data.message === 'Invalid credentials') {
+          setErrorMessage('Email or password incorrect');
+        } else {
+          setErrorMessage(data.error || 'Login failed');
+        }
+      } catch (error) {
+        console.error('Login error:', error);
       }
     },
-
   });
   return (
     <div className={styles.wrapper}>
@@ -127,7 +132,10 @@ function Login() {
             
            
           <div className=''>
-            <button className={styles.btn}>Login</button>
+            <button className={styles.btn} type='submit'>Login</button>
+          </div>
+          <div>
+            {errorMessage &&<p className='font-bold  animate-pulse'>{errorMessage}</p>}
           </div>
         
         </div> 

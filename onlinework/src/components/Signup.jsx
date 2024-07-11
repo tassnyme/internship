@@ -164,8 +164,8 @@ function Signup() {
             <div className=''>
             <button className={styles.btn} type='submit'>Signup</button>
           </div>
-          <div className='border-white border-2'>{message && <p className='font-bold border-white py-2 animate-pulse'>{message}</p>}</div>
-          </div> 
+{message && <p className='font-bold  animate-pulse'>{message}</p>}
+          </div>
         </form>
     </>
       </div>
