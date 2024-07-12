@@ -26,11 +26,12 @@ function Admin() {
 const {username}=name  
 const {Id}=userId
   return (
+    <div className={styles.body}>
     <div className={styles.grid}>
     <div className={styles.navv}><Header name={username} /></div>
     <div className={styles.sidd}>    <Sidebar arr={sideBar} /></div>
     <div className={styles.liss}>    <ListOfUsers/></div>
-    </div>
+    </div></div>
   )
 }
 

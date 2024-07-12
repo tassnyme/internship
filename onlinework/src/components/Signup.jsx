@@ -53,13 +53,14 @@ function Signup() {
   return (
     <div className={styles.wrapper}>
       
-    <div className='flex items-start justify-center   m-4 
+    <div className='flex items-start justify-center   m-12
      -py-1
      lg:flex-row
      xs:flex-col
     rounded-md
     border-4
     bg-green
+    items-center
     ' >
       <div className='w-[50%] h-full py-4 px-14 text-white'>
       <>

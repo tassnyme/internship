@@ -132,7 +132,7 @@ function Login() {
               </div>
 
               <div >
-                <Link to="/signup" className='hover:underline text-white no-underline' >create account?</Link>
+                <Link to="/register" className='hover:underline text-white no-underline' >create account?</Link>
               </div>
               
             </div>
