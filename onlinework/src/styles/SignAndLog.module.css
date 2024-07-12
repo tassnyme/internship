@@ -19,7 +19,7 @@
   }
   .divv{
     color: rgb(255, 255, 255);
-    background-color: yellowgreen;
+    background-color: #CDE7A0;
     width: 50%;
     height: 100%;
     padding:45px 0;
@@ -28,7 +28,7 @@
   .btn{
     padding: 12px 14px;
     border: none;
-    color: #a3de4a;
+    color: #CDE7A0;
     letter-spacing: 5px;
     cursor: pointer;
     position: relative;
@@ -53,8 +53,8 @@
     content:"";
     background: linear-gradient(
     45deg, 
-    #e1ff00, #d2f447, #fffb00, #d1ee2a,
-    #f2ffa9, #c3ff00, #d9ff00, #e5f995
+    #CDE7A0, #d2f447, #CDE7A0, #CDE7A0,
+    #f2ffa9, #CDE7A0, #d9ff00, #e5f995
     );
     position: absolute;
     top: -2px;
@@ -85,8 +85,8 @@
   .btn:hover::after{
     background: linear-gradient(
     45deg, 
-    #d1ee2a, #f2ffa9, #c3ff00, #d1ee2a,
-    #f2ffa9, #c3ff00, #d9ff00, #f2ffa9
+    #d1ee2a, #f2ffa9, #e7ff6f, #e0f953,
+    #f2ffa9, #e6f395, #e0f953, #edff89
     );
   }
   .btn:hover{

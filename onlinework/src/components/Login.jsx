@@ -6,8 +6,12 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import photo from '../assets/photo.jpg'; 
 import React, { useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
+import bgg from '../assets/bg.jpg'
+
 function Login() {
   const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate(); // useNavigate hook
 
   const formik = useFormik({
     initialValues: {
@@ -21,6 +25,7 @@ function Login() {
     
     onSubmit: async (values) => {
       try {
+        console.log(values)
         const response = await fetch('http://localhost:3001/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -34,10 +39,12 @@ function Login() {
         const data = await response.json();
         if (data.success && !data.admin) {
           console.log('Login successful as user');
-          window.location.href = '/user';
+          
+          navigate(`/user/${data.userId.Id}`, { state: { userId: data.userId, name:data.name , admin:false } });
+
         } else if (data.success && data.admin) {
           console.log('Login successful as admin');
-          window.location.href = '/admin';
+          navigate(`/admin/${data.userId.Id}`, { state: { userId: data.userId, name:data.name , admin:true} });
         } else if (data.message === 'Invalid credentials') {
           setErrorMessage('Email or password incorrect');
         } else {
@@ -57,7 +64,7 @@ function Login() {
      xs:flex-col
     rounded-md
     border-4
-    bg-yellowgreen
+    bg-green
     
     ' >
       <div className={styles.divv}>

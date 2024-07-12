@@ -1,28 +1,23 @@
 import React from 'react';
-import { FaRegUser } from "react-icons/fa";
-import { LiaUsersSolid } from "react-icons/lia";
-import { FiSettings } from "react-icons/fi";
-import { IoMdHelpCircleOutline } from "react-icons/io";
-import { FiVideo } from "react-icons/fi";
-import { IoNotificationsOutline } from "react-icons/io5";
-
+import bgg from '../assets/green-bg.jpg'
 import { Link } from 'react-router-dom';
 import styles from '../styles/Bar.module.css'
-const sideBar = [
-  { name: 'sessions', Icon: FiVideo   },
-  { name: 'profile', Icon:FaRegUser },
-  { name: "notifications" , Icon:IoNotificationsOutline},
-  { name: 'users', Icon: LiaUsersSolid },
-  { name: 'settings', Icon: FiSettings },
-  { name: 'help', Icon: IoMdHelpCircleOutline },
-];
 
-function Sidebar() {
+
+function Sidebar({arr}) {
+  console.log(arr)
   return (
     <div className=''>
-    <div className={styles.navigation}>
+    <div className={styles.navigation}style={{
+        backgroundImage: `url(${bgg})`, // Use template literals to insert the image URL
+        backgroundSize: 'cover', // Adjust as per your design needs
+        backgroundPosition: 'center', // Adjust as per your design needs
+      }}>
+        <div>
+          
+        </div>
       <ul className='bg-red'> 
-        {sideBar.map(({name,Icon}, index) => (
+        {arr.map(({name,Icon}, index) => (
           <div key={index} className={styles.divv}>
           <li  className={styles.active}>
             <Link to={`/admin/${name}`} className={styles.link}>
