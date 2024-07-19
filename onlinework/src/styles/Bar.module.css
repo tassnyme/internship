@@ -3,38 +3,75 @@
 @tailwind utilities;  /* Includes Tailwind utility classes */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
+body{
+    position: relative;
+}
+.backgr{
+    background: rgb(237, 237, 226 , 0.5);
+    width: 100vw;
+    height: 100vh;
+    position:absolute ;
+    left: 0;
+    top: 0;
+    position: relative;
+}
 .navigation{
+    background-color: rgb(202, 217, 173);
     overflow: hidden;
-    width: 17vw;
-    height:90vh;
+    width: 20vw;
+    height:99vh;
     box-sizing: initial;
-    border-left: 20px solid white;
-    /* background-color: yellowgreen; */
-    /* border-top: 12px solid #CDE7A0; */
+    /* border-left: 25px solid #181E36 ;
+    border-top: 15px solid #181E36 ;  */
     transition: width 0.5s;
-    padding-top:60px ;
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+    position: fixed;
+    top: 15px;
+    left: 25px;
+
 
 
 }
+@media only screen and (max-width: 600px) {
+    .navigation {
+      font-size: 8px;
+    }
+  }
+  
+  /* Medium devices (600px to 768px) */
+  @media only screen and (min-width: 600px) and (max-width: 768px) {
+    .navigation {
+      font-size: 10px;
+    }
+  }
+  
+  /* Large devices (768px and up) */
+  @media only screen and (min-width: 768px) {
+    .navigation {
+      font-size: 14px;
+    }
+  }
 
 .navigation ul li {
     position: relative;
     list-style: none;
     width: 100%;
     border-top-left-radius:20px ;
-    padding-left: 20px;
-    padding-top: 20px;
-}
-.navigation ul li .active:hover{
-    background:#fff;
-    color: rgb(20, 211, 20);
+    border-bottom-left-radius:20px ;
 
+    padding-left: 50px;
+    padding-top: 20px;
+    background-color: rgb(202, 217, 173)}
+
+.navigation ul li:hover{
+    background-color: rgb(237, 237, 226 , 0.5);
 }
 .navigation ul .divv:hover{
-    background:#fff;
-    color: rgb(20, 211, 20);
-    padding-left: 20px;
+    background:rgb(202, 217, 173);
+    color: rgb(0, 0, 0);
+    padding-left: 50px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 
@@ -47,15 +84,19 @@
     align-items: center;
     align-items: center;
     text-decoration: none;
-    color: #fff;
+    color: #809d0d;
 
 }
 .navigation ul li  .link:hover{
-    color: rgb(20, 211, 20);
+    color: rgb(0, 0, 0);
     padding-bottom: 13px;
 }
-.navigation ul li  .link .active{
-    color: #efecec;
+.navigation ul li  .link .icon:hover{
+    color: #000000;
+
+}
+.navigation ul li  .link .icon:active{
+    color: #000000;
 
 }
 .navigation ul li .link .icon{
@@ -63,6 +104,7 @@
     display: block;
     min-width: 60px;
     text-align: center;
+    color: #ffffff;
 }
 .navigation ul li .link .icon .ion{
     font-size: 1.5rem;
@@ -76,20 +118,20 @@
 .nav {
    width: 80px;
 }
-.header{
+/* .header{
     gap:4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color:#CDE7A0 ;
     width: 75vw;
-    height: 120px;
+    height: 70px;
     padding: 0 10px;
     color: white;
     margin-left: -20px;
+ */
 
 
-}
 /* .body{
     background-color: rgba(205, 231, 160, 0.4);
     position: absolute;
@@ -103,17 +145,21 @@
     top: 10px;
     left: 10px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns:  1fr 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr ;
     background: transparent;
     width:95vw;
     height:95vh;
     grid-template-areas:
-    "sidd  navv  navv navv"
-    "sidd liss liss liss"
-    "sidd liss  liss liss"
-    "sidd  . . .";
+    "sidd   . . . "
+
+    "sidd   liss liss liss "
+    "sidd   liss liss liss "
+    "sidd  . . . "
+    "sidd   . . . ";
     overflow: hidden;
+    gap : 40px;
+    color: black;
 
 }
 .navv{
@@ -124,5 +170,11 @@
 }.liss{
     grid-area: liss;
     margin-left: -20px;
+
+}
+.iconnn{
+    height: 9vh;
+    width: 9vw;
+    color: #fefefe ;
 
 }

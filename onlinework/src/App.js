@@ -6,7 +6,11 @@ import Admin from './components/Admin';
 import UserProfile from './components/UserProfile';
 import Header from './components/Header';
 import ListOfUsers from './components/ListOfUsers';
-import TodoList from './components/TodoList';
+import UserTasks from './components/UserTasks';
+import Cal from './components/Cal';
+import AdminCHECK from './components/AdminCHECK';
+import History from './components/History';
+import Slides from './components/Slides';
  
 function App() {
 
@@ -17,19 +21,22 @@ function App() {
     <div className="App"> 
       <BrowserRouter>
         <Routes>
-
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/user/:useId"r element={<UserProfile/>}  />
-          <Route path="/admin/:useId"r element={<Admin/>}  />
-
+          <Route path="/user/:useId" element={<UserProfile/>}  />
+          <Route path="/user/profile/:useId" element={<UserProfile/>}  />
+          <Route path="/user/tasks/:useId" element={<UserTasks/>}  />
+          <Route path="/user/meets/:useId" element={<Cal/>}  />
+          <Route path ="/admin/users/:useId" element={<ListOfUsers/>}></Route>
+          <Route path="/admin/meets/:useId" element={<AdminCHECK/>}  />
+          <Route path="/admin/profile/:useId" element={<Admin/>}  />
+          <Route path="/admin/history/:useId" element={<History/>}  />
           <Route path="/admin/settings" element={<UserProfile/>}></Route>
           <Route path="/admin/help" element={<UserProfile/>}></Route>
           <Route path="/admin/profile" element={<UserProfile/>}></Route>
           <Route path="/Header" element={<Header/>}/>
-          <Route path ="/admin/users" element={<ListOfUsers/>}></Route>
-          <Route path="/tasks" element={<TodoList />} />
-
+ 
         </Routes>
       </BrowserRouter>
     </div>

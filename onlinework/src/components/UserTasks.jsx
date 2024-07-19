@@ -1,14 +1,37 @@
 import React, { useState  , useEffect} from 'react';
-import { RiDeleteBinLine } from "react-icons/ri";
-import { IoMdAdd } from "react-icons/io";
-import { FaCheck } from "react-icons/fa";
-import bgg from '../assets/bg.jpg'
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
-import '../index.css'
-function TodoList({id}) {
+
+import { FaRegUser , FaCheck ,FaRegBell } from "react-icons/fa";
+import { FiSettings , FiVideo } from "react-icons/fi";
+import { IoMdHelp , IoMdAdd } from "react-icons/io";
+import { MdOutlineFormatListBulleted } from "react-icons/md";
+import { RiDeleteBinLine ,  } from "react-icons/ri";
+
+import Sidebar from './Sidebar'
+import styles from '../styles/Bar.module.css'
+
+
+const UserTasks = () => {
+
+  const sideBar = [
+    { name: 'profile', Icon:FaRegUser },
+    { name: 'Tasks', Icon: MdOutlineFormatListBulleted   },
+    { name: 'sessions', Icon: FiVideo   },
+    { name: "meets" , Icon:FaRegBell},
+    { name: 'settings', Icon: FiSettings },
+    { name: 'help', Icon: IoMdHelp },
+  ];
+  const location = useLocation(); 
+  const state = location.state; 
+  const {name,userId}=state
+  const {username}=name  
+  const {id}=userId
   const [arrayOfTasks, setArray] = useState([]);
   const [task, setTask] = useState('');
-  const [taskId, setTaskId] = useState(null);
+
+
+  console.log("im in tasks component" , state )
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +53,7 @@ function TodoList({id}) {
         description: task,
       });
       console.log('Task added successfully!');
-      window.location.reload(); // Or redirect to another route using window.location.href
+      window.location.reload(); 
 
     } catch (error) {
       console.error('Error adding task:', error);
@@ -46,7 +69,7 @@ function TodoList({id}) {
   
       if (response.ok) {
         console.log('Task deleted successfully');
-        window.location.reload(); // Or use other methods to refresh the list
+        window.location.reload(); 
       } else {
         console.log('Failed to delete task');
       }
@@ -73,7 +96,7 @@ function TodoList({id}) {
 
   const checkHandler = async (newValue) => {
     try {
-      console.log(newValue,"neeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+      
       const response = await fetch(`http://localhost:3001/check/${newValue}`, {
         method: 'PUT',
         headers: {
@@ -92,10 +115,14 @@ function TodoList({id}) {
       console.error('Error updating task status:', error);
     }
   };
-
   return (
-<div
-      className='rounded-lg flex flex-col justify-start py-12 px-8 text-green gap-3 bg-white border-2 border-green'
+    <div className={styles.backgr}>
+    <div className={styles.grid}>
+    <div className={styles.sidd}>     <Sidebar arr={sideBar} state={state} /></div>
+    <div className={styles.liss}>    
+
+    <div
+      className='  flex flex-col justify-start py-12 px-8  gap-3 bg-blueDark border-2 absolute top-40 left-[25vw] text-whiteBlue w-[70vw] '
       // style={{
       //   backgroundImage: `url(${bgg})`, 
       //   backgroundSize: 'cover', 
@@ -103,7 +130,7 @@ function TodoList({id}) {
       // }}
     >      
       <div >
-        <h1 className='bg-green py-3 text-center text-white font-bold tracking-wide text-2xl rounded-tr-lg rounded-tl-lg'>Tasks</h1>
+        <h1 className='bg-blueDark py-3 text-center text-whiteBlue font-bold tracking-wide text-2xl rounded-tr-lg rounded-tl-lg'>Tasks</h1>
       </div>
       
       <div  className='  rounded-br-lg rounded-bl-lg py-4 px-8 '>
@@ -115,7 +142,7 @@ function TodoList({id}) {
                 <div className='flex place-items-center '>{items.completed===false ? 
                   <input type="checkbox" className='checkbox:bg-green-400 w-5 h-5 place-items-center border-2 border-green'  onClick={()=>checkFunction(items._id)} /> 
                   :<FaCheck />}</div>           
-                <div className=' border-b-2 border-green w-full flex items-center' >
+                <div className=' border-b-2 border-green w-full flex items-center pb-2' >
                     <div className=' h-fit text-sm'>{items.description}</div>
                     {console.log('type',typeof(items._id))}
 
@@ -128,30 +155,31 @@ function TodoList({id}) {
       </div>
          
        )})}
-      <div className={` flex  gap-4 pt-4 border-green border-b-2 pb-2`}>
+      <div className={` flex  gap-4 pt-4 border-green border-b-2 pb-3`}>
 
         <div className='flex pt-3  items-center w-full  justify-start '>
 
           <input
             type="text"
             placeholder="Add a task..."
-            className={` bg-transparent focus:outline-none focus:placehoder:text-white pl-6 flex place-items-center  w-full placeholder:text-green focus:animate-pulse`}
+            className={` bg-transparent focus:outline-none focus:placehoder:text-white pl-6 flex place-items-center  w-full placeholder:text-whiteGrey focus:animate-pulse`}
             onChange={(e)=>setTask(e.target.value)}
           />
           
         </div>
         <div className='flex items-end'>
-            <button className=" px-8 h-40px" role="button" onClick={() => addHandler(task)}><IoMdAdd />
+            <button className=" px-8 h-40px" role="button" onClick={() => addHandler(task)}><IoMdAdd className='text-whiteGrey' />
             </button>
         </div>
       </div>
       
     </div>
     </div>
+    </div>
+<div></div>
 
+    // </div></div>
   );
-  
-}
+};
 
-export default TodoList;
-
+export default UserTasks;

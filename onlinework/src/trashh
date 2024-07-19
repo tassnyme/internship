@@ -1,0 +1,325 @@
+const calendarSchema = require("../models/calendarModel")
+const mongoose = require('mongoose');
+
+//createCalendar 
+
+const createCalendar = async (req, res) => {
+    const { id } = req.params;
+    console.log("id is", id);
+    console.log("Entering the function");
+
+
+    try {
+  const collectionName = `calendar_${id}`;
+  // Check if the model already exists, otherwise create a new one
+  let CalModel = mongoose.models[collectionName];
+console.log(CalModel)
+  if (!CalModel) {
+      console.log('doesnt exist the model')
+    CalModel = mongoose.model(collectionName, calendarSchema);
+    const count = await CalModel.countDocuments()
+      if (count ===0 ){
+          const calendar = new CalModel({});
+      for (let i = 1; i <= 31; i++) {
+          calendar.days.push({ day: i });
+      }
+      await calendar.save();
+      console.log('Calendar created successfully:', calendar);
+      res.status(201).json({ message: 'Calendar created successfully', calendar });
+              }
+
+      else {
+          console.log("exists")    
+          res.status(400).json({message: exists})  
+      }  
+  }
+  else {
+      console.log('exists the model')
+      const count = await CalModel.countDocuments()
+      if (count ===0 ){
+          const calendar = new CalModel({});
+      for (let i = 1; i <= 31; i++) {
+          calendar.days.push({ day: i });
+      }
+      await calendar.save();
+      console.log('Calendar created successfully:', calendar);
+      res.status(201).json({ message: 'Calendar created successfully', calendar });
+              }
+
+      else {
+          console.log("exists")    
+          res.status(400).json({message})  
+      }  
+  }
+        
+  
+    
+
+  
+} catch (error) {
+  console.error('Error creating calendar:', error);
+  res.status(500).json({ error: 'Internal Server Error' });
+}
+    
+};
+
+const pendingCalendar = async (req, res) => {
+    const { day, id } = req.params;
+    const collectionName = `calendar_${id}`
+    console.log(day,"dayyyyyy")
+    console.log(id)
+    console.log(typeof(day))
+    
+    try {
+        // Check if the collection exists
+        const collectionExists = await mongoose.connection.db.listCollections({ name: collectionName }).hasNext();
+        if (!collectionExists) {
+            console.log('Collection does not exist');
+            return res.status(404).json({ error: `Calendar collection not found for id ${id}` });
+        }
+        else {
+            console.log('Collection exists')
+            let CalModel = mongoose.models[collectionName];
+            if (!CalModel) {
+                CalModel = mongoose.model(collectionName, calendarSchema);
+                console.log(CalModel)
+            }
+            const updatedCalendar = await CalModel.findOneAndUpdate(
+                { 'days.day': day },
+                { $set: { 'days.$.pending': true } },
+                { new: true, useFindAndModify: false }
+            )
+            
+            if (!updatedCalendar) {
+                return res.status(404).json({ error: `Day ${day} not found in calendar ${collectionName}` });
+            }
+           else {
+                // Respond with success message and updated document
+                res.status(200).json({ message: 'Day status is pending', newCalendar: updatedCalendar });
+    
+           }
+            ;
+        }
+
+        
+       
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+const getPending = async (req, res) => {
+    const { id } = req.params;
+    console.log(typeof(id))
+    console.log(id)
+
+    console.log(id.length)
+
+
+  console.log("in pending function")
+    try {
+      // Construct the collection name
+      const collectionName = `calendar_${id}`;
+  
+      // Check if the collection exists
+      const collectionExists = await mongoose.connection.db.listCollections({ name: collectionName }).hasNext();
+      console.log("in try")
+      console.log(collectionName)
+
+
+      if (!collectionExists) {
+        console.log('Collection does not exist');
+        return res.status(404).json({ error: 'Calendar not found' });
+      }
+     else {
+        
+     console.log('found')
+     // Get or create the Mongoose model
+     let CalModel = mongoose.models[collectionName];
+     if (!CalModel) {
+        const collectionName = `calendar_${id}`;
+      console.log("im here")
+       CalModel = mongoose.model(collectionName, calendarSchema);
+     }
+     console.log("im updating")
+     console.log(CalModel)
+     const pendingDays = [];
+
+     // Find documents with at least one pending day
+     const array = await CalModel.find();
+        array.forEach(calendar => {
+        calendar.days.forEach(day => {
+            if (day.pending) {
+                pendingDays.push(day.day);
+            }
+  });
+});
+
+console.log(pendingDays)
+res.json(pendingDays)
+    }} catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to fetch pending days' });
+    }
+  };
+
+
+
+
+  const verify = async (req, res) => {
+    const { day, id } = req.params;
+    console.log("verify");
+  
+    try {
+      // Construct the collection name
+      const collectionName = `calendar_${id}`;
+  
+      // Check if the collection exists
+      const collectionExists = await mongoose.connection.db.listCollections({ name: collectionName }).hasNext();
+      console.log("in try");
+  
+      if (!collectionExists) {
+        console.log('Collection does not exist');
+        return res.status(404).json({ error: 'Calendar not found' });
+      }
+  
+      console.log('found');
+      // Get or create the Mongoose model
+      let CalModel = mongoose.models[collectionName];
+      if (!CalModel) {
+        console.log("im here");
+        CalModel = mongoose.model(collectionName, calendarSchema);
+      }
+      console.log("im updating");
+      console.log(CalModel);
+      const array = await CalModel.find();
+
+      // Step 1: Initialize an array to collect days with pending true
+      let updatedCalendar = [];
+      
+      // Step 2: Iterate through each document and its days array
+      for (const calendar of array) {
+        for (const day of calendar.days) {
+          if (day.pending) {
+            updatedCalendar.push(day); // Collect days with pending true
+          }
+        }
+      }
+      
+      // Step 3: Update documents where any day object has pending true
+      const result = await CalModel.updateMany(
+        { 'days.pending': true }, // Query condition to find documents with at least one day object having pending true
+        { $set: { 'days.$.checked': true } } // Update to set checked to true for matching day objects
+      );
+
+      consolke.log("heeeeeeeeey",updatedCalendar)
+      
+      
+  
+      if (!updatedCalendar) {
+        return res.status(404).json({ error: 'No pending days found' });
+      }
+  
+      res.json(updatedCalendar);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to update pending days' });
+    }
+  };
+  
+  
+module.exports = { createCalendar , pendingCalendar , getPending , verify};
+
+
+
+
+// //getUserChat
+// const findUserChats = async(req, res) => {
+//   const { userId } = req.params;
+//   try {
+//       const chats = await Chat.find({
+//           members: { $in: [userId] }
+//       });
+//       console.log(chats);
+//       if (chats.length===0) {
+//           console.log("mish mawjouda");
+//           res.status(200).json("no chats");
+//       } else {
+//           console.log("mawjouda");
+//           res.status(200).json(chats);
+//       }
+//   } catch (error) {
+//       console.log(error);
+//       res.status(500).json(error);
+//   }
+// }
+
+// //findChat
+// const findChat = async (req, res) => {
+//     const { firstId, secondId } = req.params;
+//     console.log(`Received firstId: ${firstId}, secondId: ${secondId}`);
+//     console.log(typeof(firstId));
+
+
+//     try {
+//       const chat = await Chat.findOne({
+//         members : {$all : [firstId , secondId]}
+//        })
+//        if (chat ){
+//         console.log("Chat found:", chat);
+//         res.status(200).json(chat);
+
+//        }
+//        else {
+//         console.log("Chat not found");
+//         res.status(404).json({ message: "Chat not found" });
+//        }
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json(error);
+//     }
+//   };
+
+// module.exports={
+//     createChat,
+//     findUserChats,
+//     findChat
+// }
+
+
+
+
+
+
+
+
+<div className='flex  w-[5000px] h-[300px] fixed top-10 left-10 bg-black  -gap-x-4 items-center'> 
+          
+          <div className='pl-4 absolute z-1000 text-white'><button > <FaLongArrowAltLeft onClick={prevSlide} size={32}/> </button></div>  
+          <div  className=' flex m-8 w-[5000px]  fixed  bg-blue-400  z-10 -gap-x-4 items-center'
+          style={{ transform: `translateX(${position}vw)` }}
+          >
+          <div className='bg bg-blue-800 w-[55vw] my-4 mx-8 text-white h-[11vh] flex flex-col gap-y-3 justify-center items-center'>
+              <div><h1>esm</h1></div>
+              <div><div><button>See calendar</button></div></div>  
+          </div>
+         <button  className='pr-4 absolute left-[56vw] z-10'> <FaLongArrowAltRight onClick={nextSlide} size={32} /> </button>
+            
+            
+          <div className='bg bg-red-400 w-[55vw] h-[11vh] my-2 mx-8 flex flex-col gap-y-1 justify-center items-center py-2'>
+                <div className='text-center '>Meets by Week </div>
+                <div className='flex gap-8 justify-between px-16 bg-yellow-400 w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
+                <div className=' flex items-center justify-between px-16 bg-red-400 w-full md:font-sans lg:py-2 md:py-1'>  
+                {week1.map((day, index) => (<div key={index} className="day">{day}</div>))}
+               </div>
+            
+            
+            </div>
+            
+           
+          </div>
+      </div>
+
+
+
+
