@@ -5,7 +5,8 @@ const taskSchema = require('../models/Task');
 const calendarSchema = require('../models/calendarModel')
 const { createCalendar } = require('../controllers/calendarController');
 const { getArrays } = require('../controllers/calendarController');
-
+const Chat = require("../models/chatModel")
+const {getChatsss} = require('./chatController')
 const registerUser = async (req, res) => {
   const { username, email, password, githubUrl } = req.body;
    
@@ -72,7 +73,7 @@ const listUsers = async (req, res) => {
     console.log("in getUser function ")
     const users = await User.find(
       { email: { $ne: 'tassnymelaroussy@gmail.com' } }
-      ).select('email uuid username -_id');
+      ).select('email uuid username _id');
         
       res.json(users);
     console.log(users)
@@ -81,6 +82,36 @@ const listUsers = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch users' });
   }
 };
+
+
+const usersAndChats = async (req, res) => {
+  try {
+    // Fetch users excluding the specified email and select specific fields
+    const users = await User.find({ email: { $ne: 'tassnymelaroussy@gmail.com' } })
+      .select('email uuid username _id');
+
+      const combinedData = [];
+
+    // Loop through users and fetch their chats concurrently using Promise.all
+    const chatPromises = users.map(async (user) => {
+      const userId = user._id.toString();
+      const chats = await Chat.find({ members: { $in: [userId] } });
+      return chats || []; // Return empty array if no chats found
+    });
+
+    const resolvedChats = await Promise.all(chatPromises);
+
+    // Combine users and flattened chats into a single array
+    combinedData.push(...users);
+    combinedData.push(...resolvedChats.flat());
+
+    res.status(200).json(combinedData);
+  } catch (error) {
+    console.error('Error fetching users and their chats:', error);
+    res.status(500).json({ error: 'Failed to fetch users and their chats' });
+  }
+};
+
 
 
 const getUserById = async (req, res) => {
@@ -118,6 +149,7 @@ module.exports = {
     loginUser,
     listUsers,
     getUserById,
-    getArray
+    getArray,
+    usersAndChats
     
   };

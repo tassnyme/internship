@@ -1,17 +1,17 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Admin from './components/Admin';
 import UserProfile from './components/UserProfile';
-import Header from './components/Header';
 import ListOfUsers from './components/ListOfUsers';
 import UserTasks from './components/UserTasks';
 import Cal from './components/Cal';
 import AdminCHECK from './components/AdminCHECK';
 import History from './components/History';
-import Slides from './components/Slides';
- 
+// import { ChatContextProvider } from './context/ChatContext';
+import Chat from './pages/Chat';
+import ChatMessages from './pages/ChatMessages';
 function App() {
 
 
@@ -19,7 +19,6 @@ function App() {
   
   return (
     <div className="App"> 
-      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Signup />} />
@@ -35,10 +34,11 @@ function App() {
           <Route path="/admin/settings" element={<UserProfile/>}></Route>
           <Route path="/admin/help" element={<UserProfile/>}></Route>
           <Route path="/admin/profile" element={<UserProfile/>}></Route>
-          <Route path="/Header" element={<Header/>}/>
- 
+          <Route path="/chat" element={<Chat />} />
+
+          <Route path='/chatmessages' element={<ChatMessages></ChatMessages>}></Route>
+         <Route  path='*' element={<Navigate to="/" />} />
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

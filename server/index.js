@@ -2,10 +2,9 @@
 
 const taskController = require('./controllers/taskController');
 const userController = require('./controllers/userController');
-const chatController = require('./controllers/chatController');
-const messageController = require ('./controllers/messageController')
 const calendarController = require ('./controllers/calendarController')
-
+const chatController = require ('./controllers/chatController')
+const messageController = require('./controllers/messageController')
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -36,7 +35,7 @@ app.post('/register', userController.registerUser);
 app.post('/login', userController.loginUser);
 app.get('/admin/list', userController.listUsers);
 app.get('/users/:userId', userController.getUserById);
-  
+ 
 app.post("/pending/:day/:id" , calendarController.pendingCalendar)
 app.get("/getPending/:id" , calendarController.getPending)
 app.post("/seeResponse/:response/:day/:Id" , calendarController.Response)
@@ -48,6 +47,14 @@ app.get('/getIdEmNa' , userController.listUsers)
 // app.get("/verify/:day/:id" , calendarController.verify)
 
 app.get('/getArray' , userController.getArray )
+
+app.post('/createChat/:fi/:si' , chatController.createChat)
+app.get('/chats/:userId' , chatController.findUserChats)
+app.get('/find/:firstId/:secondId' , chatController.findChat)
+
+app.post('/createMessage' , messageController.createMessage)
+app.get('/getMessages/:chatId' , messageController.getMessages)
+app.get('/usersAndChats' , userController.usersAndChats)
 
 
 // Start server

@@ -2,10 +2,11 @@ const mongoose = require("mongoose")
 
 const chatSchema = new mongoose.Schema(
     {
-        members : [String] ,
+        members : Array ,
     },
     {timestamps : true}
 );
 
 
-module.exports = mongoose.model('Chat', chatSchema);
+const chatModel = mongoose.model('Chat', chatSchema);
+ module.exports = chatModel
