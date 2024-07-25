@@ -28,7 +28,36 @@ const createChat = async (req,res) => {
     }
 }
 
+const createChatAndMessage = async (req,res) => {
+  const {firstId , secondId } = req.body 
+  console.log("im in chat creation  function ")
 
+  try{
+     const chat = await Chat.findOne({
+      members : {$all : [firstId , secondId]}
+     })
+     
+     if(chat) {       
+       console.log("exists")
+
+      return res.status(200).json(chat) 
+    }
+     else {
+      const newChat = new  Chat({members : [firstId , secondId]})
+      const response = await newChat.save()
+      console.log("chat created ")
+      
+      const message = new messageModel({chatId , senderId , text})
+      console.log("created message")
+      await message.save()
+    res.status(200).json(message);
+     }
+      
+  }catch(error){
+      console.log(error)
+      res.status(500).json(error)
+  }
+}
 
 
 //getUserChat
@@ -99,5 +128,6 @@ module.exports={
     createChat,
     findUserChats,
     findChat,
-    getChatsss
+    getChatsss,
+    createChatAndMessage
 }

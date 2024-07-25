@@ -11,7 +11,6 @@ import AdminCHECK from './components/AdminCHECK';
 import History from './components/History';
 // import { ChatContextProvider } from './context/ChatContext';
 import Chat from './pages/Chat';
-import ChatMessages from './pages/ChatMessages';
 function App() {
 
 
@@ -26,6 +25,8 @@ function App() {
           <Route path="/user/:useId" element={<UserProfile/>}  />
           <Route path="/user/profile/:useId" element={<UserProfile/>}  />
           <Route path="/user/tasks/:useId" element={<UserTasks/>}  />
+          <Route path="/user/messages/:useId" element={<Chat/>}  />
+
           <Route path="/user/meets/:useId" element={<Cal/>}  />
           <Route path ="/admin/users/:useId" element={<ListOfUsers/>}></Route>
           <Route path="/admin/meets/:useId" element={<AdminCHECK/>}  />
@@ -35,9 +36,7 @@ function App() {
           <Route path="/admin/help" element={<UserProfile/>}></Route>
           <Route path="/admin/profile" element={<UserProfile/>}></Route>
           <Route path="/chat" element={<Chat />} />
-
-          <Route path='/chatmessages' element={<ChatMessages></ChatMessages>}></Route>
-         <Route  path='*' element={<Navigate to="/" />} />
+          <Route  path='*' element={<Navigate to="/" />} />
         </Routes>
     </div>
   );

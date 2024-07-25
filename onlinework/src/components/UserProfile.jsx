@@ -16,7 +16,7 @@ const UserProfile = () => {
     { name: 'Tasks', Icon: MdOutlineFormatListBulleted   },
     { name: 'sessions', Icon: FiVideo   },
     { name: "meets" , Icon:FaRegBell},
-    { name: 'settings', Icon: FiSettings },
+    { name: 'messages', Icon: FiSettings },
     { name: 'help', Icon: IoMdHelp },
   ];
 
@@ -32,11 +32,10 @@ console.log("heeeeeeeeeeeeeeeeey")
   console.log(id,"hey",username)
   return (
     <div className={styles.backgr}>
-    <div className={styles.grid}>
-    <div className={styles.sidd}>    <Sidebar arr={sideBar} state={state} /></div>
-
-
-    </div></div>
+      <div className={styles.grid}>
+        <div className={styles.sidd}>    <Sidebar arr={sideBar} state={state} /></div>
+      </div>
+    </div>
   );
 };
 

@@ -3,14 +3,14 @@ import axios from 'axios';
 import InputEmoji from 'react-input-emoji';
 import { format, parseISO } from 'date-fns'; // Import functions from date-fns
 
-function ChatBox({ userChats }) {
+function ChatBox({ userChats , id}) {
   const [messages, setMessages] = useState([]);
   const [msgSent, setMsgSent] = useState('');
   const [clicked, setClicked] = useState(false);
-
+console.log("userchats isssssssssss",userChats)
   useEffect(() => {
     const fetchMessages = async () => {
-      if (userChats.length > 0) {
+      if (userChats.length === 1) {
         const chatId = userChats[0]._id;
         console.log(chatId, 'chatIddddd');
         try {
@@ -22,23 +22,26 @@ function ChatBox({ userChats }) {
           console.error(error);
         }
       }
+      else{
+        console.log("no messages found")
+      }
     };
 
     fetchMessages();
   }, [userChats]);
-
-  const senderId = userChats[0]?.members[0] !== "6697f8541598a9048c0a53c9" ? userChats[0]?.members[0] : userChats[0]?.members[1];
-
-  console.log(senderId, 'sendddddddddddddddr');
-
+  
+  
+  
+  console.log(id, 'sendddddddddddddddr');
+  
   const handleSend = async () => {
     setClicked(true);
     console.log('Message sent:', msgSent);
-
+    if (userChats.length === 1){
     try {
       const response = await axios.post('http://localhost:3001/createMessage', {
         chatId: userChats[0]._id,
-        senderId: senderId,
+        senderId: id,
         text: msgSent
       });
 
@@ -47,10 +50,16 @@ function ChatBox({ userChats }) {
       setMessages([...messages, response.data]);
     } catch (error) {
       console.error('Error sending message:', error);
-    }
+    }}
+
+    else {
+        const response = await axios.post('http://localhost:3001/createChatAndMessage', {
+            firstId: '6696ba45d44d36924a5ff12e',
+            secondId: id,
+    })
   };
 
-  // Function to format and log message dates
+  //Function to format and log message dates
   const formatDate = (messages) => {
     messages.forEach((item) => {
       const formattedDate = format(parseISO(item.createdAt), 'MMM dd, yyyy hh:mm a');
@@ -62,8 +71,8 @@ function ChatBox({ userChats }) {
     <div className='flex flex-col justify-between h-[70vh]'>
       <div className='bg-red-200 h-[90%] overflow-scroll flex flex-col px-2'>
         {messages.map((message, index) => (
-          <div key={index} className={`flex flex-col items-${message.senderId === senderId ? 'end' : 'start'} p-2`}>
-            <div className={`bg-${message.senderId === senderId ? 'yellowgreen' : 'slate-400'} p-2 rounded-lg`}>
+          <div key={index} className={`flex flex-col items-${message.senderId === id ? 'end' : 'start'} p-2`}>
+            <div className={`bg-${message.senderId === id ? 'yellowgreen' : 'slate-400'} p-2 rounded-lg`}>
               {message.text} 
               <p className='text-slate-600'>{format(parseISO(message.createdAt), ' hh:mm a')}</p> {/* Display formatted date */}
             </div>

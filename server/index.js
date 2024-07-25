@@ -56,7 +56,7 @@ app.post('/createMessage' , messageController.createMessage)
 app.get('/getMessages/:chatId' , messageController.getMessages)
 app.get('/usersAndChats' , userController.usersAndChats)
 
-
+app.post('/createChatAndMessage' , chatController.createChatAndMessage)
 // Start server
 app.listen(3001, () => {
   console.log(`Server is running on http://localhost:3001`);

@@ -15,7 +15,7 @@ function Cal() {
         { name: 'Tasks', Icon: MdOutlineFormatListBulleted },
         { name: 'sessions', Icon: FiVideo },
         { name: "meets", Icon: FaRegBell },
-        { name: 'settings', Icon: FiSettings },
+        { name: 'messages', Icon: FiSettings },
         { name: 'help', Icon: IoMdHelp },
     ];
 

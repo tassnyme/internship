@@ -40,11 +40,11 @@ function Login() {
         if (data.success && !data.admin) {
           console.log('Login successful as user');
           
-          navigate(`/user/profile/${data.userId.id}`, { state: { userId: data.userId, name:data.name , admin:false } });
+          navigate(`/user/profile/${data.userId.id}`, { state: {defaultId : data.defaultId ,  userId: data.userId, name:data.name , admin:false } });
 
         } else if (data.success && data.admin) {
           console.log('Login successful as admin');
-          navigate(`/admin/profile/${data.userId.id}`, { state: { userId: data.userId, name:data.name , admin:true} });
+          navigate(`/admin/profile/${data.userId.id}`, { state: {defaultId : data.defaultId ,  userId: data.userId, name:data.name , admin:true} });
         } else if (data.message === 'Invalid credentials') {
           setErrorMessage('Email or password incorrect');
         } else {

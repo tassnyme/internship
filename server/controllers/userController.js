@@ -54,10 +54,11 @@ const loginUser = async (req, res) => {
     else {
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (isValidPassword) {
+        const id2 = user._id
         const id = user.uuid;
         const username = user.username;
         const isAdmin = email === 'tassnymelaroussy@gmail.com';
-        return res.json({success: true, message: 'Login successful',admin: isAdmin, userId: { id },name: { username }});
+        return res.json({success: true, message: 'Login successful',admin: isAdmin, userId: { id }, defaultId :{id2} , name: { username }});
       } else {
         return res.status(404).json({ message: 'Invalid credentials' });
       }
