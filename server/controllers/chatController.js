@@ -28,36 +28,36 @@ const createChat = async (req,res) => {
     }
 }
 
-const createChatAndMessage = async (req,res) => {
-  const {firstId , secondId } = req.body 
-  console.log("im in chat creation  function ")
+const createChatAndMessage = async (req, res) => {
+  const { firstId, secondId, senderId, text } = req.body;
+  console.log("I'm in the chat creation function");
 
-  try{
-     const chat = await Chat.findOne({
-      members : {$all : [firstId , secondId]}
-     })
-     
-     if(chat) {       
-       console.log("exists")
+  try {
+    const chat = await Chat.findOne({
+      members: { $all: [firstId, secondId] }
+    });
 
-      return res.status(200).json(chat) 
+    if (chat) {
+      console.log("Chat already exists");
+      return res.status(200).json(chat);
+    } else {
+      const newChat = new Chat({ members: [firstId, secondId] });
+      const savedChat = await newChat.save();
+      console.log("Chat created");
+
+      const message = new Message({ chatId: savedChat._id, senderId, text });
+      console.log("Creating message");
+      const savedMessage = await message.save();
+      console.log("Message created");
+
+      return res.status(200).json(savedMessage);
     }
-     else {
-      const newChat = new  Chat({members : [firstId , secondId]})
-      const response = await newChat.save()
-      console.log("chat created ")
-      
-      const message = new messageModel({chatId , senderId , text})
-      console.log("created message")
-      await message.save()
-    res.status(200).json(message);
-     }
-      
-  }catch(error){
-      console.log(error)
-      res.status(500).json(error)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
-}
+};
+
 
 
 //getUserChat

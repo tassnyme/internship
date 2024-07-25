@@ -25,7 +25,7 @@ function ListOfUsers() {
       { name: 'Users', Icon: MdOutlineFormatListBulleted   },
       { name: 'meets', Icon: FiVideo   },
       { name: "history" , Icon:FaRegBell},
-      { name: 'settings', Icon: FiSettings },
+      { name: 'messages', Icon: FiSettings },
       { name: 'help', Icon: IoMdHelp },
     ]; 
     const table =  {

@@ -48,7 +48,7 @@ app.get('/getIdEmNa' , userController.listUsers)
 
 app.get('/getArray' , userController.getArray )
 
-app.post('/createChat/:fi/:si' , chatController.createChat)
+app.post('/createChat' , chatController.createChat)
 app.get('/chats/:userId' , chatController.findUserChats)
 app.get('/find/:firstId/:secondId' , chatController.findChat)
 

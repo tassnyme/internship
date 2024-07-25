@@ -151,11 +151,11 @@ body{
     width:95vw;
     height:95vh;
     grid-template-areas:
-    "sidd   . . . "
+    "sidd liss liss liss "
 
     "sidd   liss liss liss "
     "sidd   liss liss liss "
-    "sidd  . . . "
+    "sidd  liss liss liss "
     "sidd   . . . ";
     overflow: hidden;
     gap : 40px;
@@ -169,7 +169,7 @@ body{
     grid-area: sidd;
 }.liss{
     grid-area: liss;
-    margin-left: -20px;
+    margin-left: 2vw;
 
 }
 .iconnn{

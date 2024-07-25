@@ -26,6 +26,7 @@ function App() {
           <Route path="/user/profile/:useId" element={<UserProfile/>}  />
           <Route path="/user/tasks/:useId" element={<UserTasks/>}  />
           <Route path="/user/messages/:useId" element={<Chat/>}  />
+          <Route path="/admin/messages/:useId" element={<Chat/>}  />
 
           <Route path="/user/meets/:useId" element={<Cal/>}  />
           <Route path ="/admin/users/:useId" element={<ListOfUsers/>}></Route>
