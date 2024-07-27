@@ -1,0 +1,159 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
+import ChatBox from '../components/chat/ChatBox';
+import styles from '../styles/Bar.module.css';
+import { FaRegUser, FaRegBell } from "react-icons/fa";
+import { FiSettings, FiVideo } from "react-icons/fi";
+import { IoMdHelp } from "react-icons/io";
+import { MdOutlineFormatListBulleted } from "react-icons/md";
+import { format } from 'date-fns';
+import { io } from 'socket.io-client';
+
+function Chat() {
+  const sideBar = [
+    { name: 'profile', Icon: FaRegUser },
+    { name: 'Tasks', Icon: MdOutlineFormatListBulleted },
+    { name: 'sessions', Icon: FiVideo },
+    { name: "meets", Icon: FaRegBell },
+    { name: 'messages', Icon: FiSettings },
+    { name: 'help', Icon: IoMdHelp },
+  ];
+
+  const { state } = useLocation();
+  const { name, userId, admin, defaultId } = state;
+  const { username } = name;
+  const { id } = userId;
+  const { id2 } = defaultId;
+
+  const [userChats, setUserChats] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [chatId, setChatId] = useState(null);
+  const [newMessage,setNewMessage]= useState('')
+
+  useEffect(() => {
+    const newSocket = io("http://localhost:5000");
+    setSocket(newSocket);
+    
+    newSocket.emit("addNewUser", id2);
+  
+    newSocket.on("getOnlineUsers", (users) => {
+      const filteredUsers = users.filter(user => user.userId !== id2);
+      if (admin) {
+        setOnlineUsers(filteredUsers.filter(user => user.userId !== id2));
+      } else {
+        setOnlineUsers(filteredUsers.filter(user => user.userId === '6696ba45d44d36924a5ff12e'));
+      }
+    });
+    newSocket.on("userDisconnected", (userId) => {
+      setOnlineUsers(prevUsers => prevUsers.filter(user => user.userId !== userId));
+    });
+
+    newSocket.on("getMessage", (data) => {
+      setNewMessage(prevMessages => [...prevMessages, data]);
+    });
+      return () => {
+      newSocket.off("getOnlineUsers");
+      newSocket.off("userDisconnected");
+      newSocket.off("getMessage");
+      newSocket.disconnect();
+    };
+  }, [id2, admin]);
+  
+
+  
+  console.log("im in chat")
+  console.log(onlineUsers,'onliiiiiiiiiiiiiiiiiiiine')
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/chats/${id2}`);
+        setUserChats(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [id2]);
+
+  useEffect(() => {
+    const getArray = async () => {
+      try {
+        const response = await axios.post(`http://localhost:3001/getName`, { userChats });
+        setAllUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    if (userChats.length > 0) { // Check for length > 0 instead of > 1
+      getArray();
+    }
+  }, [userChats]);
+console.log(allUsers,"alllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll")
+  const formattedToday = format(new Date(), 'MMM dd, yyyy');
+
+  const handleChatIdClick = (id) => {
+    setChatId(id);
+  };
+  const userIds = onlineUsers.map(item => item.userId);
+  console.log(userIds, 'bggggtable');
+  
+  const idOfChat = userChats.length > 0 ? userChats[0]._id : null; // Check for length > 0
+  const effectiveChatId = admin ? chatId : idOfChat;
+
+  return (
+    <div className={styles.backgr}>
+      <div className={styles.grid}>
+        <div className={styles.sidd}>
+          <Sidebar arr={sideBar} state={state} />
+        </div>
+        <div className={styles.liss}>
+          <div className="flex w-[60vw] h-[90vh] overflow-hidden bg-black mt-10">
+            <div className="bg-red-400 p-4 w-1/3">
+              <div className="flex gap-[40vw]">
+                <div>chatWith:</div>
+              </div>
+              <div className="flex gap-[5vw]">
+                <div>
+                  <div className='px-3 py-2 flex flex-col gap-2' >
+                    {admin ? (
+                      allUsers.map((item) => (
+                        <div key={item.user._id} className=' flex items-center justify-between gap-2'>
+                          <button onClick={() => handleChatIdClick(item.idChat)}>
+                            {item.user.username}
+                          </button>
+                          <div className={`w-2 h-2 bg-${userIds.includes(item.user._id)?  'checked' : ''} rounded-[50%]`}></div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className='flex  items-center  gap-2'><div>admin</div> <div className={`w-2 h-2 bg-${onlineUsers.length===1?  'checked' : ''} rounded-[50%]`}></div></div>
+                    )}
+                  </div>
+                </div>
+                <div className='py-2'>{formattedToday}</div>
+              </div>
+            </div>
+            <div className="bg-blue-400 w-2/3 px-2">
+              <div className='py-4'>chatBox</div>
+              <div className="h-full">
+                <div className="bg-red-200 w-full">
+                  {chatId && <p>{chatId}</p>}
+                  <ChatBox chatId={effectiveChatId} id={id2} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Chat;
+

@@ -129,8 +129,34 @@ const getUserById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }}
 
+  const getName = async (req, res) => {
+    const { userChats } = req.body;
+  
+    try {
+      console.log("I'm in the getName function");
+      console.log(userChats);
+  
+      // Use map to create an array of promises
+      const promises = userChats.map(async (item) => {
+        const userId = item.members[0] !== "6696ba45d44d36924a5ff12e" ? item.members[0] : item.members[1];
+        const user = await User.findById(userId).select('username _id ');
+         console.log(user,'userrrrr')
 
+        return {idChat:item._id,user};
+      });
 
+      // Wait for all promises to resolve
+      const newArray = await Promise.all(promises);
+      console.log(newArray,'userrrrr')
+
+      res.json(newArray);
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      res.status(500).send('Server error');
+    }
+  };
+  
+  
   const getArray = async (req, res) => {
     try {
       console.log("in getUser function ")
@@ -151,6 +177,7 @@ module.exports = {
     listUsers,
     getUserById,
     getArray,
-    usersAndChats
+    usersAndChats,
+    getName 
     
   };

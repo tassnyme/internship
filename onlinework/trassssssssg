@@ -1,0 +1,27 @@
+useEffect(()=>{
+    if (socket===null) return;
+    socket.emit("sendMessage",{newMessage , recipientId})
+},[newMessage])
+
+useEffect(()=>{
+    if (socket===null) return;
+    socket.ont("getMessage", res=>{
+        if(currentChat?._id !== res.chatId) return
+
+        setMessages((prev)=>[...prev,res])
+    })
+},[newMessage])
+
+
+
+
+//socket file
+
+socket.io("sendMessage", (message)=>{
+    const user = onlineUsers.find((user => user.userId === message.recipientId))
+
+    if (user){
+        io.to.(user.socket).emit('getMessage',message)
+    }
+})
+

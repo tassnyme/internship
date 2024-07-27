@@ -43,7 +43,7 @@ app.post("/seeResponse/:response/:day/:Id" , calendarController.Response)
 
 app.get('/getUser' , userController.listUsers)
 app.get('/getIdEmNa' , userController.listUsers)
-
+app.post('/getName' , userController.getName)
 // app.get("/verify/:day/:id" , calendarController.verify)
 
 app.get('/getArray' , userController.getArray )

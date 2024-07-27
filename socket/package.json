@@ -1,11 +1,11 @@
 {
   "dependencies": {
+    "axios": "^1.7.2",
     "socket.io": "^4.7.5"
   },
   "name": "socket",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

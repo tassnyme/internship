@@ -4,10 +4,12 @@ const messageModel = require ('../models/messageModel')
 //createMessage 
 const createMessage = async (req, res) => {
 const {chatId , senderId , text} = req.body
+console.log("im in createmessage")
 try {
     const message = new messageModel({chatId , senderId , text})
     console.log("created message")
     await message.save()
+    
     res.status(200).json(message);
     
 }

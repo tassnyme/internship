@@ -6,16 +6,11 @@ import { FaCircleUser } from "react-icons/fa6";
 
 
 function Sidebar({arr , ph, state }) {
-  console.log(state)
   const {name,userId,admin}=state
-  console.log(name, 'naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaame')
   const {username}=name  
   const {id}=userId
   const urlVar = (admin) ? 'admin' : 'user' ; 
-  console.log('is it admin ', urlVar )
-console.log('table is ' ,arr)
-console.log(urlVar,'/',arr[3].name,'/',id)
-  console.log("im side bar and state is " , state )
+
   return (
     <div className=''>
     <div className={styles.navigation}
