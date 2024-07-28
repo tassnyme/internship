@@ -1,10 +1,10 @@
 //createchat 
 const Chat = require("../models/chatModel")
 
-const createChat = async (req,res) => {
-    const {firstId , secondId } = req.body 
-    console.log("im in chat creation  function ")
-
+const createChat = async (firstId , secondId) => {
+    
+  console.log("im in chat creation  function ")
+console.log(firstId,"et",secondId)
     try{
        const chat = await Chat.findOne({
         members : {$all : [firstId , secondId]}
@@ -13,18 +13,15 @@ const createChat = async (req,res) => {
        if(chat) {       
          console.log("exists")
 
-        return res.status(200).json(chat) 
       }
        else {
         const newChat = new  Chat({members : [firstId , secondId]})
         const response = await newChat.save()
         console.log("chat created ")
-        res.status(200).json(response)
        }
         
     }catch(error){
         console.log(error)
-        res.status(500).json(error)
     }
 }
 

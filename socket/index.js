@@ -36,11 +36,18 @@ io.on("connection", (socket) => {
     });
 
     socket.on('sendMessage', (message) => {
-      const user = onlineUsers.find(user => user.userId === message.recipientId);
+      console.log(message, "message");
+      console.log(onlineUsers);
+    
+      const user = onlineUsers.find(user => user.userId === message.recipientId && message.recipientId !== message.id2);
+      console.log(user, "user");
+    
       if (user) {
+        console.log(message)
         io.to(user.socketId).emit('getMessage', message);
       }
     });
+    
     
   });
 });

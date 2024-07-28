@@ -30,7 +30,9 @@ module.exports = {
         pistache :' #809d0d',
         whitegreen : 'rgba(237, 237, 226 , 0.9)',
         green : 'rgb(202, 217, 173)',
-        greeClaire : 'rgba(202, 217, 173 ,0.5)',
+        greeClaire : 'rgba(202, 217, 173 ,0.3)', 
+
+        // rgb(202, 217, 173)
       },
     },
   },

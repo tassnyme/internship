@@ -7,6 +7,8 @@ const { createCalendar } = require('../controllers/calendarController');
 const { getArrays } = require('../controllers/calendarController');
 const Chat = require("../models/chatModel")
 const {getChatsss} = require('./chatController')
+const { createChat } = require('../controllers/chatController');
+
 const registerUser = async (req, res) => {
   const { username, email, password, githubUrl } = req.body;
    
@@ -32,8 +34,11 @@ const registerUser = async (req, res) => {
       const calendarColl = `calendar_${userId}` ; 
       mongoose.model(calendarColl, calendarSchema);
 
-      await createCalendar(userId)
+      const adminId = await User.findOne({ email: 'tassnymelaroussy@gmail.com' }).select('_id').exec();
+      
 
+      await createCalendar(userId)
+      await createChat(user._id.toString() ,adminId._id.toString() )
       return res.status(201).json({ message: 'User registered successfully' });
     }
     

@@ -151,7 +151,7 @@ body{
     width:95vw;
     height:95vh;
     grid-template-areas:
-    "sidd liss liss liss "
+    "sidd . . . "
 
     "sidd   liss liss liss "
     "sidd   liss liss liss "

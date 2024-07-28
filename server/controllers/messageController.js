@@ -26,6 +26,7 @@ const getMessages = async(req,res)=>{
     const {chatId} =  req.params
 
     try{
+        console.log('chatId',chatId)
         const messages = await messageModel.find({chatId})
         res.status(200).json(messages)
     }
