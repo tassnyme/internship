@@ -22,7 +22,7 @@
     "progress tasks tasks "
     
     "slide slide calendar"
-    ". . calendar ";
+    "slide slide calendar ";
 
     padding: 20px;
     overflow: hidden;
@@ -33,13 +33,24 @@
 .name{
     grid-area: name;
     background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .github{
     grid-area: github;
     background-color: yellowgreen;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }.email{
     grid-area: email;
     background-color: yellow;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .tasks{
     grid-area: tasks;
@@ -59,4 +70,8 @@
 .slide{
     grid-area: slide;
     background-color: blue;
+    padding: 3% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

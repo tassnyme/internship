@@ -182,7 +182,7 @@ const getUserById = async (req, res) => {
   console.log(id)
     try {
       console.log("in getUser function");
-      const user = await User.findOne({ uuid: id }).select('email username _id githubUrl');
+      const user = await User.findOne({ uuid: id }).select('email username _id githubUrl createdAt');
       console.log(user)
 
       if (!user) {

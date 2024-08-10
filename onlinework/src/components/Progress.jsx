@@ -22,7 +22,7 @@ function Progress() {
   return (
     <div>
       <div className='flex items-center justify-center gap-[4%]'>
-        <div className='relative bg-black w-full rounded-full h-[10px] overflow-hidden '>
+        <div className='relative bg-black w-full rounded-full h-[20px] overflow-hidden '>
         <div className={styles.expanding} style={{ width: `${width}px` }} />        </div>
 
         <p className='text-white text-sm'>{width}px</p>

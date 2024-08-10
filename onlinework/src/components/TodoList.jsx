@@ -103,7 +103,7 @@ function TodoList({ id1 }) {
         </div>
       </div>
 
-      <div className='rounded-br-lg rounded-bl-lg px-8 overflow-y-scroll'>
+      <div className='rounded-br-lg rounded-bl-lg px-8 overflow-y-scroll h-1/2'>
       {array && array.map((item) => (
   <div className="flex items-center pt-4 gap-6" key={item._id}>
     <div className="flex gap-2 items-center w-full justify-start">

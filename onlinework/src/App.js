@@ -15,6 +15,7 @@ import Calendrier from './components/Calendrier';
 import TodoList from './components/TodoList';
 import UserInfo from './components/UserInfo';
 import Progress from './components/Progress';
+import CircularProg from './components/CircularProg';
 
 
 function App() {
@@ -44,6 +45,8 @@ function App() {
           <Route path="/admin/profile" element={<UserProfile/>}></Route>
           <Route path="/chat" element={<Chat />} />
           <Route  path='*' element={<Navigate to="/" />} />
+
+          <Route path="/cercle" element={<CircularProg></CircularProg>}></Route>
 
 
 

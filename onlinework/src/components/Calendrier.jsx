@@ -60,7 +60,7 @@ function Calendrier({ id1 }) {
 
     return (
         <div>
-            <div className='text-pistache pt-2 relative bg-whitegreen w-[100%] h-[32vh] justify-center items-center p-8'>
+            <div className='text-pistache pt-2 relative bg-whitegreen w-[100%] h-[31vh] justify-center items-center p-8'>
                 <div>
                     <h1 className='text-center tracking-widest font-bold'> Aout </h1>
                 </div>

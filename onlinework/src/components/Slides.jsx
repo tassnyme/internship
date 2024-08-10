@@ -78,9 +78,9 @@ useEffect(() => {
 
   return (
     <div className='' >
-      <div className='bg-whitegreen z-0 relative  w-[46vw] h-[200px] grid grid-cols-6 items-center px-4 overflow-hidden text-pistache ' > 
+      <div className='bg-transparent z-0 relative  w-[44vw] h-[150px] grid grid-cols-6 items-center px-4 overflow-hidden text-pistache ' > 
       
-      <div className='flex justify-between bg-transparent border-whitegreen border-2 -mx-12 w-[48vw] z-50 '>
+      <div className='flex justify-between bg-transparent border-whitegreen border-2 -mx-12 w-[46vw] z-50 '>
         <div className=' w-[100px] h-[100px]  z-100 flex items-center justify-center '><button><FaLongArrowAltLeft onClick={prevSlide} size={32}/></button></div>
         <div className=' w-[100px] h-[100px]  left-[500px] flex items-center justify-center '><button><FaLongArrowAltRight onClick={nextSlide} size={32}/></button></div>
       </div>
