@@ -1,0 +1,62 @@
+@tailwind base;       /* Includes Tailwind base styles */
+@tailwind components; /* Includes Tailwind components styles */
+@tailwind utilities;  /* Includes Tailwind utility classes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+
+.grid{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: grid;
+    grid-template-columns:  1fr 1fr 1fr  ;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr ;
+    background: blueviolet;
+    width:70vw;
+    height:85vh;
+    grid-template-areas:
+    " name email github"
+
+    "progress tasks tasks "
+    "progress tasks tasks "
+    
+    "slide slide calendar"
+    ". . calendar ";
+
+    padding: 20px;
+    overflow: hidden;
+    gap : 2%;
+    color: black;
+
+}
+.name{
+    grid-area: name;
+    background-color: aquamarine;
+}
+.github{
+    grid-area: github;
+    background-color: yellowgreen;
+}.email{
+    grid-area: email;
+    background-color: yellow;
+}
+.tasks{
+    grid-area: tasks;
+    background-color: violet;
+}
+.progress{
+    grid-area: progress;
+    background-color: aqua;
+    display: flex ;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}.calendar{
+    grid-area: calendar;
+    background-color: tomato;
+}
+.slide{
+    grid-area: slide;
+    background-color: blue;
+}

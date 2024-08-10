@@ -35,7 +35,8 @@ app.post('/register', userController.registerUser);
 app.post('/login', userController.loginUser);
 app.get('/admin/list', userController.listUsers);
 app.get('/users/:userId', userController.getUserById);
- 
+app.get('/getInfoAboutUser/:id' , userController.getInfoAboutUser)
+
 app.post("/pending/:day/:id" , calendarController.pendingCalendar)
 app.get("/getPending/:id" , calendarController.getPending)
 app.post("/seeResponse/:response/:day/:Id" , calendarController.Response)

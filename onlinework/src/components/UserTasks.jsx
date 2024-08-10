@@ -130,48 +130,45 @@ const UserTasks = () => {
       // }}
     >      
       <div >
-        <h1 className='bg-blueDark py-3 text-center text-whiteBlue font-bold tracking-wide text-2xl rounded-tr-lg rounded-tl-lg'>Tasks</h1>
+        <h1 className='bg-blueDark  text-center text-whiteBlue font-bold tracking-wide text-2xl rounded-tr-lg rounded-tl-lg'>Tasks</h1>
       </div>
       
       <div  className='  rounded-br-lg rounded-bl-lg py-4 px-8 '>
 
    
-       {arrayOfTasks && arrayOfTasks.map((items)=>{return(
-        <div className="flex items-center  pt-4 gap-6" key={items._id} i> 
-            <div className='flex  gap-2  items-center w-full  justify-start '>
-                <div className='flex place-items-center '>{items.completed===false ? 
-                  <input type="checkbox" className='checkbox:bg-green-400 w-5 h-5 place-items-center border-2 border-green'  onClick={()=>checkFunction(items._id)} /> 
-                  :<FaCheck />}</div>           
-                <div className=' border-b-2 border-green w-full flex items-center pb-2' >
-                    <div className=' h-fit text-sm'>{items.description}</div>
-                    {console.log('type',typeof(items._id))}
-
-                </div>
-            </div>
-        
-            <div className='flex items-end pt-2'>
-                <button  role="button" onClick={()=>concatFunction(items._id)} ><RiDeleteBinLine /></button>
-            </div>
-      </div>
-         
-       )})}
-      <div className={` flex  gap-4 pt-4 border-green border-b-2 pb-3`}>
-
-        <div className='flex pt-3  items-center w-full  justify-start '>
-
-          <input
-            type="text"
-            placeholder="Add a task..."
-            className={` bg-transparent focus:outline-none focus:placehoder:text-white pl-6 flex place-items-center  w-full placeholder:text-whiteGrey focus:animate-pulse`}
-            onChange={(e)=>setTask(e.target.value)}
-          />
-          
+      {arrayOfTasks && arrayOfTasks.length > 0 ? (
+  arrayOfTasks.map((items) => (
+    <div className="flex items-center pt-4 gap-6" key={items._id}>
+      <div className='flex gap-2 items-center w-full justify-start'>
+        <div className='flex place-items-center'>
+          {items.completed === false ? 
+            <input 
+              type="checkbox" 
+              className='checkbox:bg-green-400 w-5 h-5 place-items-center border-2 border-green'  
+              onClick={() => checkFunction(items._id)} 
+            /> 
+            : <FaCheck />
+          }
         </div>
-        <div className='flex items-end'>
-            <button className=" px-8 h-40px" role="button" onClick={() => addHandler(task)}><IoMdAdd className='text-whiteGrey' />
-            </button>
+        <div className='border-b-2 border-green w-full flex items-center pb-2'>
+          <div className='h-fit text-sm'>{items.description}</div>
+          {console.log('type', typeof(items._id))}
         </div>
       </div>
+
+      <div className='flex items-end pt-2'>
+        <button role="button" onClick={() => concatFunction(items._id)}>
+          <RiDeleteBinLine />
+        </button>
+      </div>
+    </div>
+  ))
+) : (
+  <div className='absolute left-[50%] top-[50%] translate-x-[-50%] pt-10 translate-y-[-50%] animate-pulse'>
+    No tasks yet
+  </div>
+)}
+
       
     </div>
     </div>

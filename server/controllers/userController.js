@@ -176,6 +176,28 @@ const getUserById = async (req, res) => {
     }
   };
 
+
+  const getInfoAboutUser = async (req, res) => {
+    const { id } = req.params;
+  console.log(id)
+    try {
+      console.log("in getUser function");
+      const user = await User.findOne({ uuid: id }).select('email username _id githubUrl');
+      console.log(user)
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      console.log(user);
+      res.json(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+  };
+  
+
 module.exports = {
     registerUser,
     loginUser,
@@ -183,6 +205,7 @@ module.exports = {
     getUserById,
     getArray,
     usersAndChats,
-    getName 
+    getName ,
+    getInfoAboutUser
     
   };

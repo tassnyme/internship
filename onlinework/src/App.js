@@ -11,6 +11,12 @@ import AdminCHECK from './components/AdminCHECK';
 import History from './components/History';
 // import { ChatContextProvider } from './context/ChatContext';
 import Chat from './pages/Chat';
+import Calendrier from './components/Calendrier';
+import TodoList from './components/TodoList';
+import UserInfo from './components/UserInfo';
+import Progress from './components/Progress';
+
+
 function App() {
 
 
@@ -38,6 +44,28 @@ function App() {
           <Route path="/admin/profile" element={<UserProfile/>}></Route>
           <Route path="/chat" element={<Chat />} />
           <Route  path='*' element={<Navigate to="/" />} />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <Route path='/progress'  element={<Progress></Progress>}></Route>
+
+          <Route  path ="/calendrier"  element={<Calendrier></Calendrier>}></Route>
+          <Route  path ="/TodoList"  element={<TodoList></TodoList>}></Route>
+          <Route  path ="/UserInfo"  element={<UserInfo></UserInfo>}></Route>
+
+
         </Routes>
     </div>
   );
