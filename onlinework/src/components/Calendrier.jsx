@@ -13,20 +13,22 @@ function Calendrier({ id1 }) {
     const days = Array.from({ length: 31 }, (_, i) => i + 1);
 console.log(days,'daysssss')
 days.unshift('','','')
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3001/getPending/${id1}`);
-                const { data } = response;
-                console.log(data, "data");
-                setPendingDays(data.pending); 
-                setCheckedDays(data.checked); 
-                setCanceledDays(data.canceled); 
-                console.error('Error fetching data:', error);
-            }
-        };
-        fetchData();
-    }, [id1]);
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3001/getPending/${id1}`);
+            const { data } = response;
+            console.log(data, "data");
+            setPendingDays(data.pending); 
+            setCheckedDays(data.checked); 
+            setCanceledDays(data.canceled); 
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    fetchData();
+}, [id1]);
+
 
     const updateState = (day) => {
         setDay(day);
