@@ -67,6 +67,7 @@ const pendingCalendar = async (req, res) => {
 };
 
 const getPending = async (req, res) => {
+    console.log("im useEffect 1 ")
     const { id } = req.params;
     console.log(typeof(id))
     console.log(id)
@@ -75,34 +76,41 @@ const getPending = async (req, res) => {
     console.log(collectionName)
 
     try {
-        console.log('found');
-        calendarModel = mongoose.model(collectionName, calendarSchema);
-        console.log("im updating");
-      
+        // Log that the update is starting
+        console.log('Updating model');
+
+        // Ensure calendarModel is properly set up
+        const calendarModel = mongoose.model(collectionName, calendarSchema);
+        
+        // Fetch pending days
         const array = await calendarModel.find({ pending: true });
         const pendingDays = array.map(element => element.day);
-        console.log('pending', pendingDays);
-      
+        console.log('Pending Days:', pendingDays);
+
+        // Fetch checked days
         const checked = await calendarModel.find({ checked: true });
         const checkedDays = checked.map(element => element.day);
-        console.log('checked', checkedDays);
-      
+        console.log('Checked Days:', checkedDays);
+
+        // Fetch canceled days
         const canceled = await calendarModel.find({ canceled: true });
         const canceledDays = canceled.map(element => element.day);
-        console.log('canceled', canceledDays);
-      
-        
+        console.log('Canceled Days:', canceledDays);
+
+        // Prepare response data
         const responseData = {
-          pending: pendingDays,
-          checked: checkedDays,
-          canceled: canceledDays
+            pending: pendingDays,
+            checked: checkedDays,
+            canceled: canceledDays
         };
-      
-        
+
+        // Send JSON response
         res.json(responseData);
-    }catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to fetch pending days' });
+        console.log("Exiting getPending function");
+    } catch (error) {
+        // Log the error and send a 500 response
+        console.error('Error in getPending:', error);
+        res.status(500).json({ error: 'Failed to fetch pending days' });
     }
   };
 

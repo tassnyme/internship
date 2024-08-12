@@ -9,27 +9,24 @@ function Calendrier({ id1 }) {
     const [canceledDays, setCanceledDays] = useState([]);
     const [varr, setVar] = useState(false);
     const [day, setDay] = useState("");
-    const [state, setState] = useState("");  // Added state to monitor
-
-    const days = [];
-    for (let day = 1; day <= 31; day++) {
-        days.push(day);
-    }
-
+    const [state, setState] = useState(""); 
+    const days = Array.from({ length: 31 }, (_, i) => i + 1);
+console.log(days,'daysssss')
+days.unshift('','','')
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`http://localhost:3001/getPending/${id1}`);
                 const { data } = response;
-                setPendingDays(data.pending);
-                setCheckedDays(data.checked);
-                setCanceledDays(data.canceled);
-            } catch (error) {
+                console.log(data, "data");
+                setPendingDays(data.pending); 
+                setCheckedDays(data.checked); 
+                setCanceledDays(data.canceled); 
                 console.error('Error fetching data:', error);
             }
         };
         fetchData();
-    }, [id1]); // Run effect when id1 changes
+    }, [id1]);
 
     const updateState = (day) => {
         setDay(day);
@@ -37,7 +34,7 @@ function Calendrier({ id1 }) {
     };
 
     const stateHandler = async (state) => {
-        setState(state);  // Set state here
+        setState(state); 
         try {
             const response = await axios.post(`http://localhost:3001/seeResponse/${state}/${day}/${id1}`);
             if (response.status === 202) {
@@ -51,21 +48,21 @@ function Calendrier({ id1 }) {
     };
 
     useEffect(() => {
-        if (state !== "") {
-            window.location.reload(); // Reload the page when state changes
+        if (state) {
+           
         }
-    }, [state]); // Dependency array to monitor the state
+    }, [state]);
 
     const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
     return (
-        <div>
+        <div className='relative'>
             <div className='text-pistache pt-2 relative bg-whitegreen w-[100%] h-[31vh] justify-center items-center p-8'>
                 <div>
-                    <h1 className='text-center tracking-widest font-bold'> Aout </h1>
+                    <h1 className='text-center tracking-widest font-bold'> August </h1>
                 </div>
                 <div className='absolute top-[10%] left-0 w-full grid grid-cols-7 text-center py-1'>
-                    {daysOfWeek.map((item, index) => <div key={index}> {item} </div>)}
+                    {daysOfWeek.map((item, index) => <div key={index}>{item}</div>)}
                 </div>
                 <div className='bg-transparent w-[90%] h-[70%] grid grid-cols-7 absolute left-[4%] gap-x-4 top-[20%]'>
                     {days.map((day) => (
@@ -84,13 +81,13 @@ function Calendrier({ id1 }) {
             </div>
 
             {varr && (
-                <div className='flex gap-4 fixed top-[80vh] left-[48vw]'>
+                <div className='absolute top-[85%]'>
                     <button className={clas.button7} onClick={() => stateHandler("confirm")}>Confirm</button>
                     <button className={clas.button7} onClick={() => stateHandler("cancel")}>Cancel</button>
                 </div>
             )}
         </div>
-    )
+    );
 }
 
 export default Calendrier;

@@ -123,11 +123,6 @@ const UserTasks = () => {
 
     <div
       className='  flex flex-col justify-start py-12 px-8  gap-3 bg-blueDark border-2 absolute top-40 left-[25vw] text-whiteBlue w-[70vw] '
-      // style={{
-      //   backgroundImage: `url(${bgg})`, 
-      //   backgroundSize: 'cover', 
-      //   backgroundPosition: 'center', 
-      // }}
     >      
       <div >
         <h1 className='bg-blueDark  text-center text-whiteBlue font-bold tracking-wide text-2xl rounded-tr-lg rounded-tl-lg'>Tasks</h1>
@@ -140,27 +135,23 @@ const UserTasks = () => {
   arrayOfTasks.map((items) => (
     <div className="flex items-center pt-4 gap-6" key={items._id}>
       <div className='flex gap-2 items-center w-full justify-start'>
-        <div className='flex place-items-center'>
+        <div className='flex place-items-center bg-red-400'>
           {items.completed === false ? 
             <input 
               type="checkbox" 
               className='checkbox:bg-green-400 w-5 h-5 place-items-center border-2 border-green'  
               onClick={() => checkFunction(items._id)} 
             /> 
-            : <FaCheck />
+            : <div className='absolute left-[3.4%] '> <FaCheck /></div>
+             
           }
         </div>
         <div className='border-b-2 border-green w-full flex items-center pb-2'>
           <div className='h-fit text-sm'>{items.description}</div>
-          {console.log('type', typeof(items._id))}
         </div>
       </div>
 
-      <div className='flex items-end pt-2'>
-        <button role="button" onClick={() => concatFunction(items._id)}>
-          <RiDeleteBinLine />
-        </button>
-      </div>
+      
     </div>
   ))
 ) : (

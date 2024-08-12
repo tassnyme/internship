@@ -178,6 +178,7 @@ const getUserById = async (req, res) => {
 
 
   const getInfoAboutUser = async (req, res) => {
+    console.log("im useEffect2")
     const { id } = req.params;
   console.log(id)
     try {

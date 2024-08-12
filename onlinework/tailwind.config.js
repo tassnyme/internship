@@ -24,7 +24,7 @@ module.exports = {
         // greeeen :'#085C81',
         // blueDark : '#181E36',
         // whiteBlue : '#12acd6',
-        canceled : '#FB8B8F',
+        canceled : '#FF69B4',
         pending : '#b3bdc1',
         checked : '#67C7B8',
         pistache :' #809d0d',

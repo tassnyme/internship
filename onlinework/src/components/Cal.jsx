@@ -52,7 +52,7 @@ useEffect(() => {
   };
   fetchData();
 }, [id]);
-
+console.log(id,"idddddddddddd")
     const daysOfWeek =['Monday', 'Tuesday' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' , 'Sunday']
     
 
@@ -62,15 +62,12 @@ useEffect(() => {
         try {
             const response = await axios.post(`http://localhost:3001/pending/${day}/${id}`);
             if (response.status === 202) {
-                // Handle success or update UI as needed
                 console.log('Request successful');
             } else {
-                // Handle other status codes if needed
                 console.log('Request failed');
             }
         } catch (error) {
             console.error('Error:', error);
-            // Handle errors gracefully
         } 
     };
 

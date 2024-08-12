@@ -12,9 +12,8 @@
     display: grid;
     grid-template-columns:  1fr 1fr 1fr  ;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr ;
-    background: blueviolet;
     width:70vw;
-    height:85vh;
+    height: 95vh;
     grid-template-areas:
     " name email github"
 
@@ -32,46 +31,103 @@
 }
 .name{
     grid-area: name;
-    background-color: aquamarine;
+    background-color: rgba(237, 237, 226 , 0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    row-gap: 10px;
 }
 .github{
     grid-area: github;
-    background-color: yellowgreen;
+    background-color: rgba(237, 237, 226 , 0.9);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }.email{
     grid-area: email;
-    background-color: yellow;
+    background-color: rgba(237, 237, 226 , 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .tasks{
     grid-area: tasks;
-    background-color: violet;
+    background-color: rgba(237, 237, 226 , 0.9);
+    height: ;
 }
 .progress{
     grid-area: progress;
-    background-color: aqua;
-    display: flex ;
+    background-color: rgba(237, 237, 226 , 0.9);
+    display: grid ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'completed uncompleted';
     flex-direction: column;
     justify-content: space-between;
-    padding: 10px;
-}.calendar{
+    gap: 1.5vw;
+    padding: 0 10px;
+
+}
+.completed{
+    grid-area: completed;
+    gap: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(237, 237, 226 , 0.9);
+
+}
+.uncompleted{
+    grid-area: uncompleted;
+    gap: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(237, 237, 226 , 0.9);
+    height: 100%;
+
+}
+
+
+
+.calendar{
     grid-area: calendar;
-    background-color: tomato;
+    background-color: rgba(237, 237, 226 , 0.9);
+    margin: auto 0;
 }
 .slide{
     grid-area: slide;
-    background-color: blue;
-    padding: 3% 0;
+    padding: 4% 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 
+    'progBar'
+    'perWeekSlide'
+    'perWeekSlide';
+    gap:1.5vw;
+    /* margin: auto 0; */
+
+}
+.perWeekSlide{
+    grid-area: perWeekSlide;
+    background-color: rgba(237, 237, 226 , 0.9);
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+
+
+    
+}
+.progBar{
+    grid-area: progBar;
+    background-color: rgba(237, 237, 226 , 0.9);
+    padding: 2%;
+
+    
+
 }
