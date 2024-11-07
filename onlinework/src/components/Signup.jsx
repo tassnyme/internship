@@ -3,10 +3,7 @@ import React, { useState } from 'react';
 import styles from '../styles/SignAndLog.module.css'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { AiOutlineMail } from "react-icons/ai";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { FaRegUser } from "react-icons/fa6";
-import { FiGithub } from "react-icons/fi";
+
 
 import photo from '../assets/photo.jpg'; // Importing image
 import { Link } from 'react-router-dom';
@@ -75,7 +72,6 @@ function Signup() {
             <label htmlFor="email" >Username: </label>
 
             <div className=' flex items-center border-b border-whiteGrey py-2 '> 
-              <FaRegUser className='mr-4' />
               <input
                 id="username"
                 name="username"
@@ -98,7 +94,6 @@ function Signup() {
             <label htmlFor="github"> githubUrl :</label>
           
             <div className=' flex items-center border-b border-whiteGrey py-2  '>
-            <FiGithub  className='mr-4'/>
               <input
                 id="githubUrl"
                 name="githubUrl"
@@ -119,7 +114,6 @@ function Signup() {
             <label htmlFor="email" >Email Address : </label>
 
             <div className=' flex items-center border-b border-whiteGrey py-2 '> 
-              <AiOutlineMail className='mr-4' />
               <input
                 id="email"
                 name="email"
@@ -143,7 +137,6 @@ function Signup() {
             <label htmlFor="password">Password :</label>
           
             <div className=' flex items-center border-b border-whiteGrey py-2  '>
-            <RiLockPasswordLine  className='mr-4'/>
               <input
                 id="password"
                 name="password"

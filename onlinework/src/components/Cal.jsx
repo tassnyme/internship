@@ -13,10 +13,8 @@ function Cal() {
     const sideBar = [
         { name: 'profile', Icon: FaRegUser },
         { name: 'Tasks', Icon: MdOutlineFormatListBulleted },
-        { name: 'sessions', Icon: FiVideo },
         { name: "meets", Icon: FaRegBell },
         { name: 'messages', Icon: FiSettings },
-        { name: 'help', Icon: IoMdHelp },
     ];
 
     const location = useLocation();
@@ -28,9 +26,13 @@ function Cal() {
     
 
     const days = [];
-    for (let day = 1; day <= 31; day++) {
-        days.push(day);
-    }
+days.unshift('' , '' , ''); // Add a space at the beginning
+
+for (let day = 1; day <= 31; day++) {
+    days.push(day);
+}
+
+
 
     const [pendingDays, setPendingDays] = useState([]);
     const [checkedDays, setCheckedDays] = useState([]);
@@ -83,7 +85,7 @@ console.log(id,"idddddddddddd")
                 <div className={classes.liss}>
                     <div className=' absolute top-15 left-[4vw] text-pistache pt-2 relative  bg-whitegreen  w-[60vw] h-[50vh] justify-center items-center p-8   pt-4'>
                         <div>
-                            <h1 className='text-center tracking-widest font-bold'> July </h1>
+                            <h1 className='text-center tracking-widest font-bold'> August </h1>
                         </div>
                         <div className=' absolute top-20 left-0 w-full grid grid-cols-7 text-center py-1  '>
                             

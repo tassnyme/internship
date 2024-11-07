@@ -14,10 +14,8 @@ const UserProfile = () => {
   const sideBar = [
     { name: 'profile', Icon:FaRegUser },
     { name: 'Tasks', Icon: MdOutlineFormatListBulleted   },
-    { name: 'sessions', Icon: FiVideo   },
     { name: "meets" , Icon:FaRegBell},
     { name: 'messages', Icon: FiSettings },
-    { name: 'help', Icon: IoMdHelp },
   ];
 
 

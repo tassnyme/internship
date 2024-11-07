@@ -99,7 +99,7 @@ function UserInfo({ id }) {
           </div>
           
           <div className={styles.perWeekSlide}>
-          <Slides id1={id.useId}/>
+          <Slides id1={id.useId} />
           </div>
         </div>
       </div>

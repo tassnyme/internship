@@ -24,10 +24,8 @@ function History() {
     const sideBar = [
       { name: 'profile', Icon:FaRegUser },
       { name: 'Users', Icon: MdOutlineFormatListBulleted   },
-      { name: 'meets', Icon: FiVideo   },
       { name: "history" , Icon:FaRegBell},
       { name: 'messages', Icon: FiSettings },
-      { name: 'help', Icon: IoMdHelp },
     ]; 
 
     useEffect(() => {
@@ -53,13 +51,13 @@ function History() {
       <div className={styles.grid}>
       <div className={styles.sidd}> <Sidebar arr={sideBar} state={state} /> </div>
       <div className={styles.liss}>
-      <div className=' flex flex-col gap-y-0 fixed left-[25vw] top-[6vw] '
-    style={{ overflowY: 'scroll', height: '600px' }}
+      <div className=' flex flex-col gap-y-0 fixed left-[38vw] top-[10vw]   '
+    style={{ overflowY: 'scroll' , maxHeight : '450px'}}
     >
-      <div className="">  {/* Add a class for styling */}
+      <div className="bg-whitegreen px-12">  {/* Add a class for styling */}
         {data.map((user, index) => (
           <div key={index} className=""> {/* Add a class for styling */}
-            <Slides user={user} />
+            <Slides id1={user[2]} name={user[1]} />
           </div>
         ))}
       </div>

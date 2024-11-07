@@ -1,5 +1,3 @@
-import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React ,{ useState,useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -23,10 +21,8 @@ function ListOfUsers() {
     const sideBar = [
       { name: 'profile', Icon:FaRegUser },
       { name: 'Users', Icon: MdOutlineFormatListBulleted   },
-      { name: 'meets', Icon: FiVideo   },
       { name: "history" , Icon:FaRegBell},
       { name: 'messages', Icon: FiSettings },
-      { name: 'help', Icon: IoMdHelp },
     ]; 
     const table =  {
       backgroundColor: '#181E36', // Light background color
@@ -51,28 +47,32 @@ function ListOfUsers() {
     <div className={styles.sidd}>    <Sidebar arr={sideBar} state={state}  /></div>
 
     <div className={styles.liss}>
-      <Table striped bordered hover style={table} >
-      <thead>
-        <tr>
-            <th>Id</th>
-          <th>Username</th>
-          <th>Email</th>
+    <table className='w-full  p-16'>
+  <thead>
+    <tr className='text-pistache bg-whitegreen'>
+      <th className='p-2'>Id</th>
+      <th className='p-2'>Username</th>
+      <th className='p-2'>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {data.map((item, index) => {
+      return (
+         
+        <tr key={item.uuid} className={`${index/2===0 ? 'bg-transparent' : 'bg-whitegreen' }`}>
+          <td className='p-2'>{item.username}</td>
+          <td className='p-2'>{item.email}</td>
+          <td className='p-2'>
+            <Link to={`/admin/meets/${item.uuid}`} state={state} id={item.uuid}>
+              See Calendar of Meets
+            </Link>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        {
-            data.map((item,index) => {
-                return  <tr key={item.uuid}>
-                    <td>{item.username}</td>
-                    <td>{item.email}</td>
-                    <td> <Link to={`/admin/meets/${item.uuid}`} state={state} id={item.uuid} >
-          See Calendar of Meets
-        </Link> </td>
-                </tr>})
-        }
-        
-      </tbody>
-    </Table>
+      );
+    })}
+  </tbody>
+</table>
+
     </div> </div> </div>
   )
 }

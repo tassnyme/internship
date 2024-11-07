@@ -21,7 +21,7 @@ function Sidebar({arr , ph, state }) {
     //   }}
       >
         <div className=' h-1/4 flex flex-col justify-center items-center ' >
-        <div className='pt-4 w-[40%] h-2/3 flex justify-center items-center rounded-[50%] relative overflow-hidden'> <FaCircleUser className={styles.iconnn}/> </div>
+        <div className='  w-full h-2/3 '> <div className=''><FaCircleUser className={styles.iconnn}/></div> </div>
         <div className='  w-full h-1/3 text-center text-[16px]  text-white'><h1 className='text-[16px]'></h1>{username}</div>
         </div>
         <div>

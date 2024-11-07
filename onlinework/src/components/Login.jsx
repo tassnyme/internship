@@ -81,7 +81,6 @@ function Login() {
             <label htmlFor="email" >Username: </label>
 
             <div className=' flex items-center border-b py-2 border-whiteGrey '> 
-            <AiOutlineMail className='mr-4' />
               <input
                 id="email"
                 name="email"
@@ -107,7 +106,6 @@ function Login() {
             <label htmlFor="password">Password :</label>
           
             <div className=' flex items-center border-b border-whiteGrey py-2  '>
-            <RiLockPasswordLine  className='mr-4'/>
               <input
                 id="password"
                 name="password"

@@ -6,7 +6,7 @@ import { FaLongArrowAltLeft } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import clas from '../styles/SignAndLog.module.css';
 
-function Slides({id1 }) {
+function Slides({id1 , name}) {
   
 
 const daysOfWeek =['Monday' , 'Tuedays' , 'Wednesday' , 'Thursday' , 'Friday' , 'Saturday' , 'Sunday']
@@ -93,14 +93,14 @@ useEffect(() => {
        {/* Dark blue div  */}
         <div className='bg  h-[11vh]  flex flex-col gap-y-4 justify-center items-center py-2 '>
               <div className='w-full  flex justify-center '><h1>See meets by week</h1></div>
-              <div className="w-full flex justify-center"> </div>    
+              <div className="w-full flex justify-center text-black"> {name}</div>    
         </div>
             
        {/* div week 1  */}
             
         <div className='bg   h-[11vh] flex flex-col gap-y-1 justify-center items-center ml-3'>
                 
-                <div className='flex  justify-between  px-20 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
+                <div className='flex  justify-between  px-12 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
                 <div className=' flex items-center  justify-between  w-full md:font-sans lg:py-2 md:py-1 grid grid-cols-8'>  
                 {week1.map((day, index) => (<div key={index} 
                 className={` ${checkedDays.includes(parseInt(day)) && 'bg-checked'} 
@@ -116,7 +116,7 @@ useEffect(() => {
             
         <div className='  h-[11vh] flex flex-col gap-y-1 justify-center items-center '>
                 
-        <div className='flex  justify-between  px-20 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
+        <div className='flex  justify-between  px-12 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
                 <div className=' flex items-center  justify-between  w-full md:font-sans lg:py-2 md:py-1 grid grid-cols-8'>  
                 {week2.map((day, index) => (<div key={index} 
                 className={` ${checkedDays.includes(parseInt(day)) && 'bg-checked'} 
@@ -132,7 +132,7 @@ useEffect(() => {
             
         <div className='bg   h-[11vh] flex flex-col gap-y-1 justify-center items-center '>
                 
-        <div className='flex  justify-between  px-20 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
+        <div className='flex  justify-between  px-12 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
                 <div className=' flex items-center  justify-between  w-full md:font-sans lg:py-2 md:py-1 grid grid-cols-8'>  
                 {week3.map((day, index) => (<div key={index} 
                 className={` ${checkedDays.includes(parseInt(day)) && 'bg-checked'} 
@@ -148,7 +148,7 @@ useEffect(() => {
             
         <div className='bg   h-[11vh] flex flex-col gap-y-1 justify-center items-center '>
                 
-        <div className='flex  justify-between  px-20 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
+        <div className='flex  justify-between  px-12 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
                 <div className=' flex items-center  justify-between  w-full md:font-sans lg:py-2 md:py-1 grid grid-cols-8'>  
                 {week4.map((day, index) => (<div key={index} 
                 className={` ${checkedDays.includes(parseInt(day)) && 'bg-checked'} 
@@ -164,7 +164,7 @@ useEffect(() => {
             
         <div className='bg   h-[11vh] flex flex-col gap-y-1 justify-center items-center '>
                 
-        <div className='flex  justify-between  px-20 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
+        <div className='flex  justify-between  px-12 -ml-12  w-full '> {daysOfWeek.map((el) => (<div key={el}>{el}</div>))} </div>
                 <div className=' flex items-center  justify-between  w-full md:font-sans lg:py-2 md:py-1 grid grid-cols-8'>  
                 {week5.map((day, index) => (<div key={index} 
                 className={` ${checkedDays.includes(parseInt(day)) && 'bg-checked'} 

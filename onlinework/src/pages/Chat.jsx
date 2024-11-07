@@ -13,21 +13,12 @@ import InputEmoji from 'react-input-emoji';
 import { format, parseISO, isToday } from 'date-fns';
 import ph from '../assets/profile.png'
 function Chat() {
-  const sideBar = [
-    { name: 'profile', Icon: FaRegUser },
-    { name: 'Tasks', Icon: MdOutlineFormatListBulleted },
-    { name: 'sessions', Icon: FiVideo },
-    { name: "meets", Icon: FaRegBell },
-    { name: 'messages', Icon: FiSettings },
-    { name: 'help', Icon: IoMdHelp },
-  ];
-
+ 
   const { state } = useLocation();
   const { name, userId, admin, defaultId } = state;
   const { username } = name;
   const { id } = userId;
   const { id2 } = defaultId;
-
   const [userChats, setUserChats] = useState([]);
   const [socket, setSocket] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -37,6 +28,19 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [msgSent, setMsgSent] = useState('');
   const formattedToday = format(new Date(), 'MMM dd, yyyy');
+  const sideBar = admin ? 
+  [
+    { name: 'profile', Icon: FaRegUser },
+    { name: 'Users', Icon: MdOutlineFormatListBulleted },
+    { name: "history", Icon: FaRegBell },
+    { name: 'messages', Icon: FiSettings },
+  ] : 
+  [
+    { name: 'profile', Icon:FaRegUser },
+    { name: 'Tasks', Icon: MdOutlineFormatListBulleted   },
+    { name: "meets" , Icon:FaRegBell},
+    { name: 'messages', Icon: FiSettings },
+  ];
 
 
 
@@ -117,7 +121,6 @@ function Chat() {
     fetchData();
   }, [id2]);
 
-  console.log(userChats,"userchaaaaaaaaaaaaaaaats")
   
   
   useEffect(() => {
@@ -133,14 +136,15 @@ function Chat() {
     }
   }, [userChats]);
 
+  console.log(allUsers,"alllllllllllllllllllwu")
   
-  const [recipientId , setRecipientId]=useState('')
+  const [recipientId , setRecipientId]=useState('66b772adeafce5c1d4be79dd')
   
   const handleChatIdClick = (idd) => {
 
-    if (admin===false){console.log("im in admin"); setRecipientId("6696ba45d44d36924a5ff12e")}
+    if (admin===false){console.log("im in admin"); setRecipientId("66b772adeafce5c1d4be79dd")}
     else  {const newChatId = idd;
-      console.log('newChatId',newChatId)
+      console.log("aniiiiiiiiiiiiiiiiiiiiii lnnn")
       setChatId(newChatId);
       const recipient = allUsers.find(item => item.idChat === newChatId);
         if (recipient) {
@@ -153,7 +157,6 @@ function Chat() {
  
     
   };
-  console.log(recipientId,'recipient')
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -170,30 +173,25 @@ function Chat() {
   }, [messages]);
 
 
-  console.log("chatId",chatId)
   const userIds = onlineUsers.map(item => item.userId);  
   const idOfChat = userChats.length > 0 ? userChats[0]._id : null; 
   const effectiveChatId = admin ? chatId : idOfChat;
 
-  console.log('effectiiiiiiiiiiiiiiive',effectiveChatId)
   // Ensure socket is not null before using it
 useEffect(() => {
   if (!socket) return;
 
-  console.log(msgSent, "hhhhhhhhhhhhh");
   socket.emit("sendMessage", { msgSent, recipientId , id2});
 }, [msgSent, recipientId, socket]); // Include socket in dependency array to avoid potential issues
 
 
-console.log(messages,"messagessss")
-console.log(newMessage,"newwwwmessagessss")
+
 
 useEffect(() => {
   if (!socket) return;
 
   const handleGetMessage = (res) => {
-    console.log(id2,"iddddddddddddddddddd")
-    console.log(res,"respooooooonse")
+    
     // if (chatId !== res.chatId) {return}
     console.log("les messages")
     console.log(res.msgSent)
@@ -221,7 +219,6 @@ const [clicked, setClicked] = useState(false)
     }));
   };
 
-console.log("onlineuseddddddddddddddddrs", onlineUsers)
 
 
   useEffect(() => {
@@ -242,9 +239,12 @@ console.log("onlineuseddddddddddddddddrs", onlineUsers)
 
 
 
-  console.log(messages,"messssssages")
 
-  
+  console.log("recipient is", recipientId)
+  console.log("chatid", chatId)
+  console.log("effectivechatid", effectiveChatId)
+
+
   return (
     <div className={styles.backgr}>
       <div className={styles.grid}>
@@ -259,22 +259,48 @@ console.log("onlineuseddddddddddddddddrs", onlineUsers)
               </div>
               <div className="flex gap-[5vw]">
                 <div>
-                  <div className='px-3 py-2 flex flex-col gap-2' >
-                    {admin ? (
-                      allUsers.map((item) => (
-                        <div key={item.user._id} className={` flex items-center justify-between px-4 gap-8 rounded-md w-[18vw] p-2 bg-${ effectiveChatId ===item.idChat ?  'green' : ''}`}>
-                          <div className='flex gap-2'><div> <img src={ph} alt="" /> </div>
-                          <button onClick={() => handleChatIdClick(item.idChat)}>
-                            {item.user.username}
-                          </button></div>
-                          
-                          <div className={`w-2 h-2 bg-${userIds.includes(item.user._id)?  'checked' : ''} rounded-[50%]`}></div>
-                        </div>
-                      ))
-                    ) : (
-                      <div className='flex  items-center  gap-4 '>  {userChats?.map((item)=>(<div key={item._id}> <button onClick={()=>handleChatIdClick(item._id)}>admin</button> </div>))} <div className={`w-2 h-2 bg-${onlineUsers.length===1?  'checked' : ''} rounded-[50%]`}></div></div>
-                    )}
-                  </div>
+                <div className='px-3 py-2 flex flex-col gap-2'>
+  {admin ? (
+    allUsers.map((item) =>
+      item.user.username !== 'tassnymelaroussy' && (
+        <div
+          key={item.user._id}
+          className={`flex items-center justify-between px-4 gap-8 rounded-md w-[18vw] p-2 ${
+            effectiveChatId === item.idChat && recipientId ? 'bg-sidebar' : 'bg-transparent'
+          }`}
+        >
+          <div className='flex gap-2'>
+            <div>
+              <img src={ph} alt='' />
+            </div>
+            <button onClick={() => handleChatIdClick(item.idChat)}>
+              {item.user.username}
+            </button>
+          </div>
+          <div
+            className={`w-2 h-2 ${
+              userIds.includes(item.user._id) ? 'bg-checked' : 'bg-transparent'
+            } rounded-[50%]`}
+          ></div>
+        </div>
+      )
+    )
+  ) : (
+    <div className='flex items-center gap-4'>
+      {userChats?.map((item) => (
+        <div key={item._id}>
+          admin
+        </div>
+      ))}
+      <div
+        className={`w-2 h-2 ${
+          onlineUsers.length === 1 ? 'bg-checked' : 'bg-transparent'
+        } rounded-[50%]`}
+      ></div>
+    </div>
+  )}
+</div>
+
                 </div>
                 {/* <div className='py-2'>{formattedToday}</div> */}
               </div>
@@ -307,10 +333,23 @@ console.log("onlineuseddddddddddddddddrs", onlineUsers)
                     )}
 
                     </div>
-                    <div className='flex absolute z-100 top-[103%] w-[39vw]  flex items-center'>
-                      <InputEmoji value={msgSent} onChange={setMsgSent} onKeyDown={handleKeyDown } />
-                       <div> <button onClick={()=>handleChatIdClick(effectiveChatId)} className='hover:bg-green hover:rounded-lg hover:px-2 py-1 ' >Send</button></div>
-                    </div>
+                    <div className="flex absolute z-100 top-[103%] w-[39vw] items-center">
+  <InputEmoji
+    value={msgSent}
+    onChange={setMsgSent}
+    onKeyDown={handleKeyDown}
+    placeholder="Type a message..."
+  />
+  <div>
+    <button
+      onClick={() => handleChatIdClick(effectiveChatId)}
+      className="hover:bg-green-500 hover:rounded-lg hover:px-2 py-1"
+    >
+      Send
+    </button>
+  </div>
+</div>
+
                   </div>
                 </div>
               </div>

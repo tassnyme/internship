@@ -31,6 +31,8 @@ module.exports = {
         whitegreen : 'rgba(237, 237, 226 , 0.9)',
         green : 'rgb(202, 217, 173)',
         greeClaire : 'rgba(202, 217, 173 ,0.3)', 
+        bgg : 'rgba(237, 237, 226 , 0.9)',
+        sidebar : 'rgba(217, 225, 180 , 0.9)'
 
         // rgb(202, 217, 173)
       },

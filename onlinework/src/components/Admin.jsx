@@ -12,10 +12,8 @@ function Admin() {
   const sideBar = [
     { name: 'profile', Icon:FaRegUser },
     { name: 'Users', Icon: MdOutlineFormatListBulleted   },
-    { name: 'meets', Icon: FiVideo   },
     { name: "history" , Icon:FaRegBell},
     { name: 'messages', Icon: FiSettings },
-    { name: 'help', Icon: IoMdHelp },
   ];   
  
   const location = useLocation();
@@ -32,7 +30,10 @@ console.log("heeeeeeeeeeeeeeeeey")
     <div className={styles.grid}>
     <div className={styles.navv}><Header name={username} /></div>
     <div className={styles.sidd}>    <Sidebar arr={sideBar} state={state} /></div>
-    </div></div>
+    <div className='flex items-center justify-center h-screen w-screen text-2xl'>ADMIN</div>
+
+    </div>
+    </div>
   )
 }
 

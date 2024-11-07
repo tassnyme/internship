@@ -17,10 +17,8 @@ function AdminCHECK() {
     const sideBar = [
         { name: 'profile', Icon:FaRegUser },
         { name: 'Users', Icon: MdOutlineFormatListBulleted   },
-        { name: 'meets', Icon: FiVideo   },
         { name: "history" , Icon:FaRegBell},
         { name: 'messages', Icon: FiSettings },
-        { name: 'help', Icon: IoMdHelp },
       ];   
 
 

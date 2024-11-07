@@ -176,6 +176,11 @@ body{
     height: 9vh;
     width: 9vw;
     color: #fefefe ;
+    position: absolute;
+    top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+
 
 }
 
